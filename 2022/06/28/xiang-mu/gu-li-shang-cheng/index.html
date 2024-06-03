@@ -1,0 +1,2203 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="谷粒商城, 月明水清深">
+    <meta name="description" content="一、项目架构
+
+1.1 数据库与模块对应关系
+
+
+数据库
+模块
+解释(端口)
+
+
+
+sms
+coupon
+优惠(7000)
+
+
+ums
+member
+会员(8000)
+
+
+oms
+order
+订单(9000)
+
+
+pms
+product
+商">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+    <style>
+        body{
+            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+    <title>谷粒商城 | 月明水清深</title>
+    <link rel="icon" type="image/png" href="/../medias/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="月明水清深" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/./medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">月明水清深</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/./medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">月明水清深</div>
+        <div class="logo-desc">
+            
+            添砖嘎娃
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zzyong24/zzyong24.github.io.git" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zzyong24/zzyong24.github.io.git" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">谷粒商城</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/">
+                                <span class="chip bg-color">谷粒商城</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/" class="post-category">
+                                谷粒商城
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-06-28
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-05-14
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    21 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、项目架构"><a href="#一、项目架构" class="headerlink" title="一、项目架构"></a>一、项目架构</h1><img src="/2022/06/28/xiang-mu/gu-li-shang-cheng/image-20181231162312680.png" alt="image-20181231162312680" style="zoom:200%;">
+
+<h2 id="1-1-数据库与模块对应关系"><a href="#1-1-数据库与模块对应关系" class="headerlink" title="1.1 数据库与模块对应关系"></a>1.1 数据库与模块对应关系</h2><table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>模块</th>
+<th>解释(端口)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sms</td>
+<td>coupon</td>
+<td>优惠(7000)</td>
+</tr>
+<tr>
+<td>ums</td>
+<td>member</td>
+<td>会员(8000)</td>
+</tr>
+<tr>
+<td>oms</td>
+<td>order</td>
+<td>订单(9000)</td>
+</tr>
+<tr>
+<td>pms</td>
+<td>product</td>
+<td>商品(10000)</td>
+</tr>
+<tr>
+<td>wms</td>
+<td>ware</td>
+<td>仓储(11000)</td>
+</tr>
+</tbody></table>
+<h1 id="二、虚拟机安装"><a href="#二、虚拟机安装" class="headerlink" title="二、虚拟机安装"></a>二、虚拟机安装</h1><h2 id="2-1-安装VisualBox"><a href="#2-1-安装VisualBox" class="headerlink" title="2.1 安装VisualBox"></a>2.1 安装VisualBox</h2><p>下载链接：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Downloads![img](https://cdn.nlark.com/yuque/0/2022/png/22792222/1642154999691-229ada95-1f0f-4a01-a81a-e74bcaeb3699.png)">https://www.virtualbox.org/wiki/Downloads![img](https://cdn.nlark.com/yuque/0/2022/png/22792222/1642154999691-229ada95-1f0f-4a01-a81a-e74bcaeb3699.png)</a></p>
+<p>备注：安装该软件需要开启CPU虚拟化（必须得安装）</p>
+<h2 id="2-2-安装vagrant"><a href="#2-2-安装vagrant" class="headerlink" title="2.2 安装vagrant"></a>2.2 安装vagrant</h2><p>官网链接：<a target="_blank" rel="noopener" href="https://www.vagrantup.com/">https://www.vagrantup.com/</a> </p>
+<p>下载特别慢，使用以下下载途径</p>
+<p>csdn博客，vagrant2.2.7云盘地址：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yuanjianhua77/article/details/104143240">https://blog.csdn.net/yuanjianhua77/article/details/104143240</a></p>
+<p>注：已保存至百度网盘中</p>
+<p>根据提示安装完成后，重启机器，打开命令行</p>
+<pre class="line-numbers language-none"><code class="language-none">vagrant -v<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642155218861-7740e393-6528-4049-a41a-5ac8e95ba031.png" alt="img"></p>
+<p>出现以上提示则安装成功</p>
+<h2 id="2-3-安装centos-x2F-7（自动方式）"><a href="#2-3-安装centos-x2F-7（自动方式）" class="headerlink" title="2.3 安装centos/7（自动方式）"></a>2.3 安装centos/7（自动方式）</h2><p>在任意文件夹打开cmd控制台窗口</p>
+<p>输入以下命令：</p>
+<ol>
+<li>初始化镜像</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vagrant init centos/7<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>初始化之后， 会在当前文件夹生成Vagrantfile文件，该文件即是当前镜像配置</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642157855036-18f5ff40-53ce-45ea-a2c0-0b4b89604e7b.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642157872829-b8399e8f-beb8-4229-80fc-e2f34cac9543.png" alt="img"></p>
+<ol>
+<li>安装镜像（使用官方渠道下载镜像， 速度特别慢）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vagrant up<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="2-3-安装centos-x2F-7（手动方式）"><a href="#2-3-安装centos-x2F-7（手动方式）" class="headerlink" title="2.3 安装centos/7（手动方式）"></a>2.3 安装centos/7（手动方式）</h2><ol>
+<li>下载镜像</li>
+</ol>
+<p>centos/7 box镜像下载链接: <a target="_blank" rel="noopener" href="https://app.vagrantup.com/centos/boxes/7">https://app.vagrantup.com/centos/boxes/7</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642156690152-0b59c04d-3086-4908-be14-ea138ec881e8.png" alt="img"></p>
+<ol>
+<li>添加镜像至box</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vagrant box add imageName imagePath<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其中： imageName为要取的名字，不能加/，加/的话默认找的是官方镜像</p>
+<p>​     imagePath为镜像的路径，记得写成绝对路径</p>
+<p>镜像管理其他命令：</p>
+<p>vagrant box list ： 列出所有镜像</p>
+<p>vagrant box remove imageName ： 移出镜像</p>
+<ol>
+<li>安装镜像</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vagrant init imageName
+vagrant up<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="2-4-虚拟机网络配置"><a href="#2-4-虚拟机网络配置" class="headerlink" title="2.4 虚拟机网络配置"></a>2.4 虚拟机网络配置</h2><p>在2.3中，我们使用<code>vagrant init</code>命令生成了VagrantFile文件，该文件即保存了该虚拟机的基本信息</p>
+<p>如果我们想让Win10 本机与 centos虚拟机互相ping 通， 需要<strong>二者在同一网段中</strong></p>
+<p>步骤如下：</p>
+<ol>
+<li>查看本机VisualBoxIP 网段</li>
+</ol>
+<p>cmd控制台输入<code>ipconfig</code></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642158069906-7e81983e-e337-401e-aa85-226027eb07e5.png" alt="img"></p>
+<p>网段处于：192.168.56.1</p>
+<ol>
+<li>配置VagrantFile文件（具体位置详见2.3）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642157996907-47c47147-f780-4acb-bdc6-24a8065edc71.png" alt="img"></p>
+<ol>
+<li>修改第35行，该行默认为注释状态，打开注释之后， 修改ip地址，使其与Win10 本机位于同一网段之中</li>
+<li>重新启动虚拟机</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vagrant reload<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="2-5-如何修改vagrant系统的root用户密码"><a href="#2-5-如何修改vagrant系统的root用户密码" class="headerlink" title="2.5 如何修改vagrant系统的root用户密码"></a>2.5 如何修改vagrant系统的root用户密码</h2><ol>
+<li><p>先使用vagrant 用户登录。</p>
+</li>
+<li><p>$sudo passwd root #按照提示输入两次新的密码，并加以确认。</p>
+</li>
+</ol>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">然后就可以修改root用户密码<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>如何使用Xhsll连接Vagrant</p>
+<ol>
+<li><p>修改 /etc/ssh/sshd_config 文件，（注意，vagrant用户下这个文件是只读的，可能什么也看不见）<br>修改 ssd_config 里 PermitRootLogin属性 改为yes ，并把前面的# 去掉</p>
+<p><img src="/2022/06/28/xiang-mu/gu-li-shang-cheng/image-20181231213338306.png" alt="image-20181231213338306"></p>
+</li>
+<li><p>PasswordAuthentication 改为yes 并且去掉 #</p>
+<p><img src="/2022/06/28/xiang-mu/gu-li-shang-cheng/image-20220815213354128.png" alt="image-20220815213354128"></p>
+</li>
+<li><p>保存退出，重启sshd服务</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ systemctl restart sshd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h1 id="三、Docker及相关软件安装"><a href="#三、Docker及相关软件安装" class="headerlink" title="三、Docker及相关软件安装"></a>三、Docker及相关软件安装</h1><h2 id="3-1-Docker安装及加速配置"><a href="#3-1-Docker安装及加速配置" class="headerlink" title="3.1 Docker安装及加速配置"></a>3.1 Docker安装及加速配置</h2><ol>
+<li>删除旧版本docker</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>安装docker仓库</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo yum install -y yum-utils
+ 
+ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>安装docker引擎</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo yum install docker-ce docker-ce-cli containerd.io<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>配置docker镜像加速</strong></p>
+<ol>
+<li>打开阿里云镜像加速服务地址：<a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></li>
+<li>点击镜像工具-&gt;镜像加速器</li>
+<li>按照提示输入命令<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642158637599-060cd627-7867-4a2f-8717-f69f3c6fca76.png" alt="img"></li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
+{
+  "registry-mirrors": ["https://249x3agn.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>设置docker自启动</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">systemctl enable docker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="3-2-安装Mysql"><a href="#3-2-安装Mysql" class="headerlink" title="3.2 安装Mysql"></a>3.2 安装Mysql</h2><ol>
+<li><p>下载Mysql5.7镜像</p>
+<pre class="line-numbers language-none"><code class="language-none">docker pull mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>查看已安装镜像</p>
+<pre class="line-numbers language-none"><code class="language-none">docker images<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642158768143-71f3f3d9-f5d3-46b1-bd11-a7ef618d9879.png" alt="img"></p>
+<ol>
+<li>启动Mysql</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -p 3306:3306 --name gulimall-mysql \
+-v /home/gulimall/mydata/mysql/log:/var/log/mysql \
+-v /home/gulimall/mydata/mysql/data:/var/lib/mysql \
+-v /home/gulimall/mydata/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+-v /home/gulimall/mydata/mysql/conf:/etc/mysql \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>参数解释：</p>
+<p>-p ： 设置端口关联， 虚拟机端口3306映射到docker容器端口3306</p>
+<p>-v：目录挂载，虚拟机目录/mydata/mysql…映射到docker容器目录/var/…</p>
+<p>-d：指定image镜像</p>
+<ol>
+<li>查看Mysql容器<br><code>docker ps</code><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642159387950-bdfcd0a7-204f-41e3-a5be-80fdb4864e0e.png" alt="img"></li>
+<li>修改Mysql配置<br>由于我们已经将配置目录映射到虚拟机的/mydata/mysql/conf目录，因此现在只需要<strong>创建并编辑my.cnf文件即可</strong></li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">vim /home/gulimall/mydata/mysql/conf/my.cnf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>添加一下内容：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+[mysqld]
+init_connect='SET collation_connection = utf8_unicode_ci'
+init_connect='SET NAMES utf8'
+character-set-server=utf8
+collation-server=utf8_unicode_ci
+secure_file_priv=/var/lib/mysql
+expire_logs_days=7
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+max_connections=1000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Mysql重启<code>docker restart mysql</code></p>
+<ol>
+<li>进入容器内部<br>启动容器后， 使用<code>docker exec -it mysql /bin/bash</code>进入容器内部<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642159698746-1d7e79b2-8a7d-40d4-ae16-3e31e2536ad7.png" alt="img"></li>
+<li>进入mysql<br><code>mysql -uroot -p</code></li>
+<li>或者不进入容器直接进入mysql<br><code>docker exec -it mysql mysql -uroot -p</code></li>
+</ol>
+<p>**远程连接<code>mysql**</code></p>
+<ol>
+<li><p>登陆容器内部执行以下命令</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">use</span> mysql<span class="token punctuation">;</span>
+<span class="token keyword">select</span> Host<span class="token punctuation">,</span><span class="token keyword">User</span> <span class="token keyword">from</span> <span class="token keyword">user</span><span class="token punctuation">;</span>
+<span class="token keyword">update</span> <span class="token keyword">user</span> <span class="token keyword">set</span> Host<span class="token operator">=</span><span class="token string">'*'</span> <span class="token keyword">where</span> <span class="token keyword">user</span><span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">;</span>
+flush <span class="token keyword">privileges</span><span class="token punctuation">;</span>
+<span class="token keyword">exit</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>即可远程连接</p>
+</li>
+</ol>
+<p><strong>修改远程登陆root密码</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">use</span> mysql；
+<span class="token comment"># 查询authentication_string是否为空</span>
+<span class="token keyword">select</span> host<span class="token punctuation">,</span><span class="token keyword">user</span><span class="token punctuation">,</span>authentication_string <span class="token keyword">from</span> <span class="token keyword">user</span> <span class="token keyword">where</span> <span class="token keyword">user</span><span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">;</span>
+<span class="token comment"># 若不为空 还需要执行</span>
+<span class="token keyword">update</span> <span class="token keyword">user</span> <span class="token keyword">set</span> authentication_string<span class="token operator">=</span><span class="token string">''</span> <span class="token keyword">where</span> <span class="token keyword">user</span><span class="token operator">=</span><span class="token string">'root'</span><span class="token punctuation">;</span><span class="token comment">--将字段置为空</span>
+
+<span class="token comment"># 否则直接执行</span>
+flush <span class="token keyword">privileges</span><span class="token punctuation">;</span>
+<span class="token keyword">ALTER</span> <span class="token keyword">user</span> <span class="token string">'root'</span><span class="token variable">@'%'</span> IDENTIFIED <span class="token keyword">BY</span> <span class="token string">'MBGpDKacnhfrlusTjL7qoCF6ySiWxXkO'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="3-3-安装Redis"><a href="#3-3-安装Redis" class="headerlink" title="3.3 安装Redis"></a>3.3 安装Redis</h2><ol>
+<li>下载Redis镜像 <code>docker pull redis</code></li>
+<li>创建实例并启动redis</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mkdir -p /home/gulimall/mydata/redis/conf
+touch /home/gulimall/mydata/redis/conf/redis.conf
+
+docker run -p 6379:6379 --name gulimall-redis -v /home/gulimall/mydata/redis/data:/data \
+-v /home/gulimall/mydata/redis/conf/redis.conf:/etc/redis/redis.conf \
+-d redis redis-server /etc/redis/redis.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>为了保证redis重启后数据不丢失， 修改redis.conf配置文件， 启用AOF模式</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">appendonly yes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="3-4-Docker容器自启动"><a href="#3-4-Docker容器自启动" class="headerlink" title="3.4 Docker容器自启动"></a>3.4 Docker容器自启动</h2><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">docker update containerName --restart=always<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="四、开发环境"><a href="#四、开发环境" class="headerlink" title="四、开发环境"></a>四、开发环境</h1><h2 id="4-1-JDK版本"><a href="#4-1-JDK版本" class="headerlink" title="4.1 JDK版本"></a>4.1 JDK版本</h2><p>统一在JDK1.8</p>
+<h2 id="4-2-Maven配置"><a href="#4-2-Maven配置" class="headerlink" title="4.2 Maven配置"></a>4.2 Maven配置</h2><ol>
+<li>本机Maven版本是3.6<br><code>mvn -version</code></li>
+<li>配置Maven阿里云镜像</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrors</span><span class="token punctuation">&gt;</span></span>
+	<span class="token comment">&lt;!-- 阿里云仓库-public --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>aliyunmaven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>阿里云公共仓库<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>https://maven.aliyun.com/repository/public<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span>
+	
+	<span class="token comment">&lt;!-- 阿里云仓库-central --&gt;</span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirror</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>aliyunmaven<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrorOf</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>阿里云公共仓库<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+	  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url</span><span class="token punctuation">&gt;</span></span>https://maven.aliyun.com/reposit
+	  ory/central<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirror</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mirrors</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>配置Maven使用JDK1.8编译项目</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profiles</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>jdk-1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">&gt;</span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">&gt;</span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">&gt;</span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jdk</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jdk</span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">&gt;</span></span>	
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.source</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.source</span><span class="token punctuation">&gt;</span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.target</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.target</span><span class="token punctuation">&gt;</span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maven.compiler.compilerVersion</span><span class="token punctuation">&gt;</span></span>1.8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maven.compiler.compilerVersion</span><span class="token punctuation">&gt;</span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profiles</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4-3-IDEA配置"><a href="#4-3-IDEA配置" class="headerlink" title="4.3 IDEA配置"></a>4.3 IDEA配置</h2><ol>
+<li>本地Maven配置<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642237192788-5c88a531-56b7-4c35-9649-2f6943396e8e.png" alt="img"></li>
+<li>插件安装<br>Lombok</li>
+</ol>
+<p>MyBatisx</p>
+<p>在安装插件时， 如果Idea Plugins打不开或者下载速度过慢， 可以直接去Idea 插件商城手动下载并导入插件</p>
+<p>插件商城地址：<a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/10119-mybatisx">https://plugins.jetbrains.com/plugin/10119-mybatisx</a></p>
+<p>从磁盘导入插件<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642237958399-35fdd1f1-3349-4717-a653-932a14da4462.png" alt="img"></p>
+<h2 id="4-4-VsCode配置"><a href="#4-4-VsCode配置" class="headerlink" title="4.4 VsCode配置"></a>4.4 VsCode配置</h2><ol>
+<li>下载地址： <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+<li>下载速度过慢：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112215618">https://zhuanlan.zhihu.com/p/112215618</a></li>
+<li>安装VsCode插件<br>Auto Close Tag<br>Auto Rename Tag<br>Chinese<br>ESLint<br>HTML CSS Support<br>HTML Snippets<br>JavaScript<br>Live Server<br>Open in brower<br>Vetur</li>
+</ol>
+<h2 id="4-5-Git配置以及绑定码云"><a href="#4-5-Git配置以及绑定码云" class="headerlink" title="4.5 Git配置以及绑定码云"></a>4.5 Git配置以及绑定码云</h2><ol>
+<li>下载git：<a target="_blank" rel="noopener" href="https://www.git-scm.com/download/win">https://www.git-scm.com/download/win</a></li>
+<li>配置git， 进入git bash</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"># 配置用户名
+git config --global user.name “username”
+# 配置邮箱
+git config --global user.email "username@email.com" // 注册时用的邮箱<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>配置ssh免密登陆</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"># 生成ssh密钥
+ssh-keygen -t rsa -C "username@email.com" // 注册时用的邮箱
+# 连续三次回车
+# 会生成id_rsa 与 id_rsa.pub文件
+# 登陆进入gitee， 在设置里面找到SSH KEY将.pub文件内容粘贴进去
+ssh -T git@gitee.com 测试是否成功<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="4-6-初始化项目"><a href="#4-6-初始化项目" class="headerlink" title="4.6 初始化项目"></a>4.6 初始化项目</h2><ol>
+<li>于码云创建仓库， 注意配置以下两点</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642239589555-3007753f-56b6-489e-92f6-1d54f07280bf.png" alt="img"></p>
+<ol>
+<li>创建成功后， 复制仓库ssh地址， 将项目克隆至Idea</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642239643214-66f27b70-c68c-4540-b20d-c8fb175e0dbe.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642239662307-afad60bc-642a-4fbc-9d59-83bb4176c9be.png" alt="img"></p>
+<h2 id="4-7-创建服务"><a href="#4-7-创建服务" class="headerlink" title="4.7 创建服务"></a>4.7 创建服务</h2><p>商品服务、仓储服务、订单服务、优惠券服务、用户服务</p>
+<p><strong>示例：创建商品服务</strong></p>
+<ol>
+<li>创建Project， 使用Spring 初始化项目</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642239963464-b8f03279-4dc5-4dd7-9d6d-7c18cd661aaa.png" alt="img"></p>
+<p>这一步可能初始化失败， 设置代理即可<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642240009596-0d89d14d-a725-4b6d-8ea7-bfb713aed6e0.png" alt="img"></p>
+<p>详见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42815122/article/details/85551956">https://blog.csdn.net/qq_42815122/article/details/85551956</a></p>
+<ol>
+<li>设置Module信息</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642239979897-c7421139-1c5d-4b22-8aaa-62803ebe5d7a.png" alt="img"></p>
+<ol>
+<li>勾选依赖</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642240121809-bc3477d3-ef30-44b9-b165-4713ba6705c6.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642240129040-148a4a68-e56f-4182-8f90-801e09725096.png" alt="img"></p>
+<h2 id="4-8-聚合服务"><a href="#4-8-聚合服务" class="headerlink" title="4.8 聚合服务"></a>4.8 聚合服务</h2><p>创建所有子模块之后， 将任意一个pom文件拷贝到父项目</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642243290464-d4e27841-3283-400e-be68-03a34851713d.png" alt="img"></p>
+<p>修改为</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span>
+         <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modelVersion</span><span class="token punctuation">&gt;</span></span>4.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modelVersion</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.atguigu.gulimall<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>gulimall<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">&gt;</span></span>gulimall<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">&gt;</span></span>聚合服务<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>packaging</span><span class="token punctuation">&gt;</span></span>pom<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>packaging</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modules</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">&gt;</span></span>gulimall-coupon<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">&gt;</span></span>gulimall-member<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">&gt;</span></span>gulimall-order<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">&gt;</span></span>gulimall-product<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">&gt;</span></span>gulimall-ware<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modules</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>作为聚合项目， 并将聚合项目添加至maven， 点击 + 之后， 找到新复制后修改的pom.xml</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642243330043-a212c74b-1fdb-431b-8c42-6425f5e2f5bd.png" alt="img"></p>
+<p>作用： 用于将所有子模块聚合在一起， 使用root模块的LifeCycle命令所有子模块都会执行， 比如clean。。。</p>
+<h2 id="4-9-配置git-ignore"><a href="#4-9-配置git-ignore" class="headerlink" title="4.9 配置git ignore"></a>4.9 配置git ignore</h2><p>修改root项目的 .gitignore文件，添加以下内容</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"># 忽略所有项目（包括子项目），mvnw文件
+**/mvnw
+# 忽略所有项目（包括子项目），mvnw.cmd文件
+**/mvnw.cmd
+
+
+# 忽略所有项目（包括子项目），.mvn文件
+**/.mvn
+# 忽略所有项目（包括子项目），target文件
+**/target
+# 忽略所有项目（包括子项目），.gitignore文件
+**/.gitignore
+# 当前目录下，.idea文件
+.idea<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看local changes， 目前只有以下文件才会被监控是否存在修改</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642244373623-5fd27219-826f-41c7-9819-df7cee9aad7d.png" alt="img"></p>
+<p>注：如果点击Git之后没有Local Changes， 这个是Idea2020版以后才有的问题， 修改以下设置即可（链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/boxifeng/article/details/108868855%EF%BC%89">https://blog.csdn.net/boxifeng/article/details/108868855）</a></p>
+<p>取消勾选该选项</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642244253380-4549b88d-b134-45c2-a825-68f1eea21ce3.png" alt="img"></p>
+<h2 id="4-10-初次提交至码云"><a href="#4-10-初次提交至码云" class="headerlink" title="4.10 初次提交至码云"></a>4.10 初次提交至码云</h2><ol>
+<li>将需要追踪变化的文件添加至VCS</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642244578001-55b6c279-4e5d-4d93-aecc-8c35413db494.png" alt="img"></p>
+<ol>
+<li>下载码云Idea插件（gitee）</li>
+<li>项目提交</li>
+</ol>
+<p>同上图， 点击commit files</p>
+<p>点击之后出现：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642244710741-bde78eac-be19-4881-8296-4782b2d3917a.png" alt="img"></p>
+<p>点击commit</p>
+<p><strong>提交成功！！！</strong></p>
+<h2 id="4-11-配置人人开源后台管理系统"><a href="#4-11-配置人人开源后台管理系统" class="headerlink" title="4.11 配置人人开源后台管理系统"></a>4.11 配置人人开源后台管理系统</h2><ol>
+<li>renren-fast 后台管理系统地址：<a target="_blank" rel="noopener" href="https://gitee.com/renrenio/renren-fast">https://gitee.com/renrenio/renren-fast</a></li>
+<li>git clone</li>
+<li>删除项目.gitignore</li>
+<li>修改root pom文件， 导入renren-fast项目</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642247498167-550e1a85-e88d-4792-9986-bee359c76efe.png" alt="img"></p>
+<ol>
+<li>初始化renren-fast数据库</li>
+</ol>
+<p>创建数据库：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642247532970-58ffe626-81c4-4543-94d3-7e526031d3cf.png" alt="img"></p>
+<p>运行sql文件：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642247711020-21122e42-c2c1-47f7-97e4-6fe0b25943e4.png" alt="img"></p>
+<ol>
+<li>修改application.yml文件， 查看之后发现使用的dev版本配置文件</li>
+</ol>
+<p>修改数据库配置：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642247797312-0e865f22-72c9-4b83-bafc-9b059b2b9fc5.png" alt="img"></p>
+<ol>
+<li>测试是否后台部署成功， 访问<a target="_blank" rel="noopener" href="http://localhost:8080/renren-fast/">http://localhost:8080/renren-fast/</a></li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642247921662-8a78a28a-23f6-4a92-9f68-beada3e2f7de.png" alt="img"></p>
+<h2 id="4-12-配置人人开源前台界面"><a href="#4-12-配置人人开源前台界面" class="headerlink" title="4.12 配置人人开源前台界面"></a>4.12 配置人人开源前台界面</h2><ol>
+<li>将项目导入至VScode（直接将文件夹拖入即可）</li>
+<li>安装Node.js，下载地址：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a> （<a target="_blank" rel="noopener" href="https://www.jb51.net/article/126744.htm%EF%BC%89">https://www.jb51.net/article/126744.htm）</a></li>
+<li>配置npm镜像（淘宝）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">npm config set registry http://registry.npm.taobao.org<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>VScode中下载依赖</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">npm install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642248680902-18fe27d9-a649-4102-9e7c-a2f05944bf6e.png" alt="img"></p>
+<ol>
+<li>VScode中启动项目</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">npm run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>记录一下安装步骤：</p>
+<ol>
+<li>根据人人开源Github提示， 使用cnpm下载依赖</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/renrenio/renren-fast-vue/wiki/Getting-started">https://github.com/renrenio/renren-fast-vue/wiki/Getting-started</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642299860260-4ee88537-657d-4dc8-9446-2e6ffdbf9cae.png" alt="img"></p>
+<p>在安装过程中，都是由于node-sass下载不成功导致的错误</p>
+<ol>
+<li>修改项目中node-sass版本（要与Node.js对应）</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/node-sass">https://www.npmjs.com/package/node-sass</a><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642299959835-dd225114-6668-40ef-8f74-3cf836190a92.png" alt="img"></p>
+<p>这里我的node.js版本是Node16， 因此需要修改成6.0以上， 我改成了6.0.1<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642299999097-c0422342-8092-4850-a3a1-7f619ad88dda.png" alt="img"></p>
+<ol>
+<li>除此之外，还需要手动修改node-sass下载源（好像前面配置的源在下载node-sass时不起作用）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">npm config set sass_binary _site=https://npm.taobao.org/mirrors/node-sass<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>使用cnpm 下载依赖</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">cnpm install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>运行项目</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">cnpm run dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="4-13-人人开源逆向工程（代码生成器）"><a href="#4-13-人人开源逆向工程（代码生成器）" class="headerlink" title="4.13 人人开源逆向工程（代码生成器）"></a>4.13 人人开源逆向工程（代码生成器）</h2><p>在开发后台代码时，使用人人开源renren-generator代码生成器生成所有实体类，controller等代码</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642319117485-f94ee6bf-7af8-4243-8a8d-2c496997ba69.png" alt="img"></p>
+<p>记录一下使用流程</p>
+<ol>
+<li>下载开源项目：renren-generator（这里和前面的人人开源后台、前台方式一样）</li>
+<li>配置renren-generator基本信息与生成模板</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642319320200-e807b8f1-805c-41a9-bf7e-6863db68f77c.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642319335119-517129be-5edc-4df2-af92-7d53d31dc92a.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642319346879-31e51c61-5b50-4df2-abbb-7bde56fdd246.png" alt="img"></p>
+<ol>
+<li>进入网页</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642319240559-88fa4261-608f-43b4-bd96-e363dbdd6c36.png" alt="img"></p>
+<ol>
+<li>选中需要生成的表之后， 点击生成代码即可</li>
+</ol>
+<h1 id="五、-其他整合配置"><a href="#五、-其他整合配置" class="headerlink" title="五、 其他整合配置"></a>五、 其他整合配置</h1><h2 id="5-1-Spring-Boot整合Mybatis-plus"><a href="#5-1-Spring-Boot整合Mybatis-plus" class="headerlink" title="5.1 Spring Boot整合Mybatis-plus"></a>5.1 Spring Boot整合Mybatis-plus</h2><ol>
+<li>导入依赖mybatis-plus依赖以及mysql-driver依赖</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--        mybatis-plus--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.baomidou<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>mybatis-plus-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>3.3.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!--        mysql驱动--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>8.0.17<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>配置application.yml数据源以及其他信息</li>
+</ol>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">datasource</span><span class="token punctuation">:</span>
+    <span class="token key atrule">username</span><span class="token punctuation">:</span> root
+    <span class="token key atrule">password</span><span class="token punctuation">:</span> root
+    <span class="token key atrule">url</span><span class="token punctuation">:</span> jdbc<span class="token punctuation">:</span>mysql<span class="token punctuation">:</span>//192.168.56.10<span class="token punctuation">:</span>3306/gulimall_pms
+    <span class="token key atrule">driver-class-name</span><span class="token punctuation">:</span> com.mysql.jdbc.Driver
+
+<span class="token key atrule">mybatis-plus</span><span class="token punctuation">:</span>
+  <span class="token comment"># 告诉mapper配置文件在哪里(xxx.xml) 若在classpath后面加个*，表示连所依赖的其他module也扫描</span>
+  <span class="token key atrule">mapper-locations</span><span class="token punctuation">:</span> classpath<span class="token punctuation">:</span>/mapper/<span class="token important">**/*.xml</span>
+  <span class="token key atrule">global-config</span><span class="token punctuation">:</span>
+    <span class="token key atrule">db-config</span><span class="token punctuation">:</span>
+      <span class="token key atrule">id-type</span><span class="token punctuation">:</span> auto<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642318820727-1a391144-3b58-44ce-9f45-a13e928641ab.png" alt="img"></p>
+<ol>
+<li>配置Mapper扫描</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642318713819-9b1b0308-e017-41f6-a2d2-199f939f1bb4.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642318731105-4c723852-11d8-427b-bab9-21187b192ed6.png" alt="img"></p>
+<h2 id="5-2-Spring-Cloud-alibaba"><a href="#5-2-Spring-Cloud-alibaba" class="headerlink" title="5.2 Spring Cloud alibaba"></a>5.2 Spring Cloud alibaba</h2><p>绑定依赖即可</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencyManagement</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-alibaba-dependencies<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>2.2.7.RELEASE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>type</span><span class="token punctuation">&gt;</span></span>pom<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>type</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">&gt;</span></span>import<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencyManagement</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-3-服务注册发现Nacos-discover"><a href="#5-3-服务注册发现Nacos-discover" class="headerlink" title="5.3 服务注册发现Nacos-discover"></a>5.3 服务注册发现Nacos-discover</h2><ol>
+<li>添加Nacos依赖</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.alibaba.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-alibaba-nacos-discovery<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>下载并开启Nacos Server（这里为了方便使用Docker部署Nacos Server）</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull nacos/nacos-server
+
+docker run \
+--name gulimall-nacos \
+-e MODE=standalone \
+-p 8848:8848 \
+-p 9848:9848 \
+-e JVM_XMS=256m \
+-e JVM_XMX=256m \
+-d nacos/nacos-server<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>配置Spring Boot服务yml文件，进行服务注册，并添加注解，配置完毕后启动项目</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642334090183-6dba1356-ec31-477f-81bf-e464e8141a7b.png" alt="img"></p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.56.10:8848
+application:
+    name: gulimall-coupon<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642337618054-93a55119-5cf8-4ec5-abad-307c4e40295e.png" alt="img"></p>
+<ol>
+<li>访问nacos页面（在虚拟机上，且暴露的docker端口是8848，链接:192.168.56.10:8848/nacos)</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642340646596-8b1f94f1-e492-4d22-8789-d5dfa8f14295.png" alt="img"></p>
+<ol>
+<li>查看已注册的服务</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642340830248-86567ed9-495e-4d61-8740-af67d52014a5.png" alt="img"></p>
+<p>记录一个问题，报错</p>
+<p>生成configDataContextRefres失败：Error creating bean with name ‘configDataContextRefresher</p>
+<p>加上依赖</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>bootstrap<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">3.0</span><span class="token number">.3</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-4-远程调用open-fengn"><a href="#5-4-远程调用open-fengn" class="headerlink" title="5.4 远程调用open-fengn"></a>5.4 远程调用open-fengn</h2><ol>
+<li>引入依赖open-feign</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-openfeign<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>org.springframework.cloud<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>spring-cloud-starter-loadbalancer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>创建feign接口，添加注解</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@FeignClient</span><span class="token punctuation">(</span><span class="token string">"gulimall-coupon"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">CouponFeignService</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/coupon/coupon/member/list"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">R</span> <span class="token function">membercoupons</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642425389697-4252fb4a-7969-496a-ae0f-f6aa2a710170.png" alt="img"></p>
+<ol>
+<li><p>注解FeignClient：此注解是调用的其他微服务名字，可以前往nacos注册中心查看</p>
+</li>
+<li><p>注解RequestMapping：该注解时调用的微服务的路径<img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642425474617-c4cb9c76-d694-4fd6-80cb-79b6861dcb94.png" alt="img"></p>
+</li>
+<li><p>配置Application开启远程调用功能</p>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642425960505-e93dbb0d-36a4-4a69-aa70-661fcb11f54b.png" alt="img"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@EnableFeignClients</span><span class="token punctuation">(</span>basePackages <span class="token operator">=</span> <span class="token string">"com.atguigu.gulimall.member.feign"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>记录一个问题，报错</p>
+<p>java.lang.AbstractMethodError: org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient.cho</p>
+<p>原因：没有loadbalanc，或者nacos中<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=ribbon&amp;spm=1001.2101.3001.7020">ribbon</a>造成loadbalanc包失效</p>
+<p>我这里是已经导入了loadbalanc，所以就是导致失效的问题， 将ribbon包排除即可</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>alibaba<span class="token operator">-</span>nacos<span class="token operator">-</span>discovery<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>exclusions<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>exclusion<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>netflix<span class="token operator">-</span>ribbon<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>exclusion<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>exclusions<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-5-配置中心Nacos-config"><a href="#5-5-配置中心Nacos-config" class="headerlink" title="5.5 配置中心Nacos-config"></a>5.5 配置中心Nacos-config</h2><ol>
+<li>导入依赖</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>alibaba<span class="token operator">-</span>nacos<span class="token operator">-</span>config<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>配置Bootstarp.propertise配置文件</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642429254293-2e6c0116-267b-4ea5-a162-114eb5fd102a.png" alt="img"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"># 应用名
+spring<span class="token punctuation">.</span>application<span class="token punctuation">.</span>name<span class="token operator">=</span>gulimall<span class="token operator">-</span>coupon
+
+# nacos地址
+spring<span class="token punctuation">.</span>cloud<span class="token punctuation">.</span>nacos<span class="token punctuation">.</span>config<span class="token punctuation">.</span>server<span class="token operator">-</span>addr<span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.56</span><span class="token number">.10</span><span class="token operator">:</span><span class="token number">8848</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>Nacos网页添加配置</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642428814621-6370fc9a-1db4-4f33-b63d-594d15a2b834.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642428879003-a8f5bc8c-aa99-41a4-b07f-8d17031533a3.png" alt="img"></p>
+<ol>
+<li>使用配置</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642428934711-6471ffa2-1649-45bc-b215-afefb337101b.png" alt="img"></p>
+<ol>
+<li>配置自动刷新（修改网页配置值之后， 能动态刷新）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642428969932-1566fc3d-adc9-4546-8bde-0bcac4114dea.png" alt="img"></p>
+<h3 id="5-5-1-Nacos-Config基本概念"><a href="#5-5-1-Nacos-Config基本概念" class="headerlink" title="5.5.1 Nacos-Config基本概念"></a>5.5.1 Nacos-Config基本概念</h3><ul>
+<li><strong>命令空间</strong>：配置隔离</li>
+</ul>
+<p>默认：public（保留空间）；默认新增的所有配置都在public空间</p>
+<ol>
+<li><ol>
+<li>开发、测试、生产（利用命名空间来做环境隔离）</li>
+</ol>
+</li>
+</ol>
+<p>在不指定命名空间的前提下，默认使用的是public命名空间，可以在bootstrap.properties中指定命名空间（唯一ID）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642476085432-9c383de3-81db-42b4-9455-6e2630a6300c.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642476059000-f188ac59-8923-4ad6-9065-dffc1083ed1c.png" alt="img"></p>
+<ol>
+<li><ol>
+<li>基于每一个微服务之间， 互相隔离配置，每一个微服务都创建自己的命名空间</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><strong>配置集</strong>：所有的配置的集合就叫做配置集</li>
+<li><strong>配置集ID</strong>：类似于配置文件名</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642476987804-918e0171-913f-4bbb-a155-0b10121b1a90.png" alt="img"></p>
+<ul>
+<li><strong>配置分组</strong>：默认所有的配置集都属于：DEFAULT_GROUP</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642477028555-1803941d-4ac4-46c2-807e-aa2c21ce37cb.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642477269715-f2221c5d-b0cc-4553-8b8a-3f44624e9750.png" alt="img"></p>
+<h3 id="5-5-2-Nacos-Config使用示例"><a href="#5-5-2-Nacos-Config使用示例" class="headerlink" title="5.5.2 Nacos-Config使用示例"></a>5.5.2 Nacos-Config使用示例</h3><p>开发环境中，我们application.yml文件是不配置的，所有的配置都会进行拆分（数据源、mybatis、其他。。。），并且根据不同的运行环境(设置不同的分组)，配置不同的配置文件</p>
+<p>例如：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642479268085-f952fb13-7524-4142-aa30-813cc8a1e712.png" alt="img"></p>
+<p>另外，还需要在bootstarp.properties中进行声明，使用配置中心的配置</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642479302099-c5c9cd7e-810d-44e2-85b5-576ab076beb4.png" alt="img"></p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">spring.cloud.nacos.config.extension-configs[0].data-id=datasource.yml
+spring.cloud.nacos.config.extension-configs[0].group=dev
+spring.cloud.nacos.config.extension-configs[0].refresh=true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="5-6-Gateway网关"><a href="#5-6-Gateway网关" class="headerlink" title="5.6 Gateway网关"></a>5.6 Gateway网关</h2><p>用于拦截所有请求，经过网关的过滤之后，才转发到指定的路由</p>
+<p>配置步骤：</p>
+<ol>
+<li>导入依赖</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
+&lt;/dependency&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>配置映射</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642490361991-4a96798b-2a85-4f8a-b2c3-84781ec02dfa.png" alt="img"></p>
+<h2 id="5-7-jsckson日期格式化配置"><a href="#5-7-jsckson日期格式化配置" class="headerlink" title="5.7 jsckson日期格式化配置"></a>5.7 jsckson日期格式化配置</h2><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+	<span class="token key atrule">jackson</span><span class="token punctuation">:</span>
+    	<span class="token key atrule">date-format</span><span class="token punctuation">:</span> yyyy<span class="token punctuation">-</span>MM<span class="token punctuation">-</span>dd HH<span class="token punctuation">:</span>mm<span class="token punctuation">:</span>ss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="六、知识预备"><a href="#六、知识预备" class="headerlink" title="六、知识预备"></a>六、知识预备</h1><h2 id="6-1-ES6"><a href="#6-1-ES6" class="headerlink" title="6.1 ES6"></a>6.1 ES6</h2><ol>
+<li>let</li>
+</ol>
+<p>let用于声明变量，有三个特性：</p>
+<ul>
+<li>声明的变量严格限制在作用域内</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492505138-271ae8c5-1ec5-4bde-9a4f-5d5f308374f0.png" alt="img"></p>
+<ul>
+<li>let变量只能声明一次</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492539255-db295de5-3e1e-4911-8bed-4d005c50ef66.png" alt="img"></p>
+<ul>
+<li>let变量不存在变量提升</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492564225-f07d8c54-73df-436e-b24f-aab4ac191d42.png" alt="img"></p>
+<ol>
+<li>const</li>
+</ol>
+<p>用于声明只读常量，声明后无法修改</p>
+<ol>
+<li>解构表达式（支持数组解构、对象解构）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492691987-5b29148e-e3f6-42af-ac36-b5e44c54a071.png" alt="img"><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492806412-95d4b09e-bcb7-4a29-af3a-6b58ce8e507a.png" alt="img"></p>
+<ol>
+<li>字符串扩展（提供了几个方法）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492845911-ea6f4d92-8385-440d-9d00-69fee9381914.png" alt="img"></p>
+<ol>
+<li>字符串模板</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642492924767-e4f11b51-63d1-4492-9950-1e70a1b8dfb2.png" alt="img"></p>
+<ol>
+<li>插值语法</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493029990-e8a871c2-9d64-4524-84bc-c72b56da147d.png" alt="img"></p>
+<ol>
+<li>函数优化</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493091883-1c4fa13a-4f65-4c3f-95a7-3e3fdd73525c.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493214488-ba3fa0d8-35a7-4622-a007-aea5604a3368.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493226942-0557abf7-c018-4992-9b16-b68e699ad1b3.png" alt="img"></p>
+<ol>
+<li>对象优化</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493532582-ac45c2f6-11a2-4418-a520-3c2bdeb2f37d.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493583069-8dccff11-e63a-4f2e-b9ca-709ead45932c.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642493739609-9a7a8341-e51c-4ec9-9f5b-d5327ba467ce.png" alt="img"></p>
+<ol>
+<li>promise</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642494631156-8c0fcb59-539f-4238-9a3b-7eed871fe89b.png" alt="img"></p>
+<h2 id="6-2-Vue集成Element-UI"><a href="#6-2-Vue集成Element-UI" class="headerlink" title="6.2 Vue集成Element-UI"></a>6.2 Vue集成Element-UI</h2><ol>
+<li>cnpm安装element-ui</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">cnpm i element-ui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>引入element-ui， main.js文件中，添加以下内容</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">import ElementUI from 'element-ui'
+Vue.use(ElementUI)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="6-3-网关统一解决跨域问题"><a href="#6-3-网关统一解决跨域问题" class="headerlink" title="6.3 网关统一解决跨域问题"></a>6.3 网关统一解决跨域问题</h2><p>链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/chengqiuming/article/details/109272812">https://blog.csdn.net/chengqiuming/article/details/109272812</a></p>
+<h2 id="6-4-Mybatis-Plus逻辑删除"><a href="#6-4-Mybatis-Plus逻辑删除" class="headerlink" title="6.4 Mybatis-Plus逻辑删除"></a>6.4 Mybatis-Plus逻辑删除</h2><ol>
+<li>配置文件配置全局删除与不删除对应的值（删除为1，不删除为0）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642745915179-3d655799-f2ef-4fd3-85e2-d8aec24156ee.png" alt="img"></p>
+<ol>
+<li>找到对应实体类， 配置逻辑删除对应的字段（这里也可以配置局部具体逻辑删除代表的值）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642745998044-1115811d-607f-4667-9cb1-023f0edd812a.png" alt="img"></p>
+<ol>
+<li>调用mapper进行删除</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642746152779-8b30031a-9f71-4c35-b71f-b1480372512b.png" alt="img"></p>
+<p>逻辑删除本质是将是否显示字段从显示（0），置为不显示（1）， 并不是将其删除</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642747802392-e909017e-d0b8-4702-88e5-629f22c721f5.png" alt="img"></p>
+<h2 id="6-5-Mybatis-Plus分页"><a href="#6-5-Mybatis-Plus分页" class="headerlink" title="6.5 Mybatis-Plus分页"></a>6.5 Mybatis-Plus分页</h2><p><a target="_blank" rel="noopener" href="https://baomidou.com/pages/8f40ae/">https://baomidou.com/pages/8f40ae/</a></p>
+<h2 id="6-6-Mysql不使用开窗获取行号"><a href="#6-6-Mysql不使用开窗获取行号" class="headerlink" title="6.6 Mysql不使用开窗获取行号"></a>6.6 Mysql不使用开窗获取行号</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> a<span class="token punctuation">.</span><span class="token identifier"><span class="token punctuation">`</span>cat_id<span class="token punctuation">`</span></span><span class="token punctuation">,</span>a<span class="token punctuation">.</span><span class="token identifier"><span class="token punctuation">`</span>name<span class="token punctuation">`</span></span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token variable">@rowNum</span>:<span class="token operator">=</span><span class="token variable">@rowNum</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> rowNo
+<span class="token keyword">FROM</span> pms_category a<span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token punctuation">(</span><span class="token variable">@rowNum</span> :<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> b
+<span class="token keyword">WHERE</span> a<span class="token punctuation">.</span><span class="token identifier"><span class="token punctuation">`</span>parent_cid<span class="token punctuation">`</span></span><span class="token operator">=</span><span class="token string">'0'</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> a<span class="token punctuation">.</span>cat_id <span class="token keyword">ASC</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22792222/1642776910789-1e220d55-8502-4c42-a927-a5d59af2d5ff.png" alt="img"></p>
+<h1 id="七、云存储"><a href="#七、云存储" class="headerlink" title="七、云存储"></a>七、云存储</h1><h2 id="7-1-两种存储模式对比"><a href="#7-1-两种存储模式对比" class="headerlink" title="7.1 两种存储模式对比"></a>7.1 两种存储模式对比</h2><blockquote>
+<p>​    整体上存在两种存储模式，<code>前端直传</code>以及<code>后端间接传</code>。简单来说：前端直传的模式是，前端调用后端policy接口获取临时密钥，再通过临时密钥将文件直接传出到云存储；而后端简介传模式时，前端将文件传输到后端之后，再借助于后端去传递给云存储。</p>
+<p>两种模式的区别主要在于：</p>
+<p>​    <strong>后台上传</strong>：用户-&gt;云服务器-&gt;对象存储</p>
+<ul>
+<li>优点：可利用已有的用户认证机制，安全性更好做。</li>
+<li>缺点：占用云服务器的入站带宽，如果上传占有带宽太大，可能会是瓶颈。</li>
+</ul>
+<p>​    <strong>前端直传</strong>：用户-&gt;对象存储</p>
+<ul>
+<li>优点：不占用云服务器带宽。</li>
+<li>缺点：需要考虑安全、不完整上传等问题，对技术方案要求更高。（主要需要注意临时密钥的授权策略）</li>
+</ul>
+</blockquote>
+<p>一般来说采用的都是前端直传的方式。</p>
+<h2 id="7-2-OSS与COS"><a href="#7-2-OSS与COS" class="headerlink" title="7.2 OSS与COS"></a>7.2 OSS与COS</h2><p>阿里云与腾讯云在使用前端直传模式上有细微区别，主要是：</p>
+<ol>
+<li><p>获取Policy临时密钥API不一致（可参考OssService）</p>
+</li>
+<li><p>前端上传图片模式不一致</p>
+<blockquote>
+<p>​    阿里云可以通过post请求将临时密钥等信息放进data中。</p>
+<p>而腾讯云需要修改请求头等信息，且需要引入前端依赖sdk：import COS from ‘cos-js-sdk-v5’</p>
+<p>具体区别可以参考前端组件<code>singleUpload</code></p>
+</blockquote>
+</li>
+</ol>
+<p>cos使用可以参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhengjiacheng2016/article/details/120464025">vue案例</a>, <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/436/9067">官方资料</a>, <a target="_blank" rel="noopener" href="https://github.com/tencentyun/qcloud-cos-sts-sdk/commits/master/java/src/test/java/com/tencent/cloud/CosStsClientTest.java?author=dt3310321">policy接入</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">zhuzhiyong</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zzyong24.github.io/2022/06/28/xiang-mu/gu-li-shang-cheng/">https://zzyong24.github.io/2022/06/28/xiang-mu/gu-li-shang-cheng/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">zhuzhiyong</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%B0%B7%E7%B2%92%E5%95%86%E5%9F%8E/">
+                                    <span class="chip bg-color">谷粒商城</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/06/28/gong-ju/typora-guo-qi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="typora过期">
+                        
+                        <span class="card-title">typora过期</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
+                                    工具
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">工具</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/06/13/java/kuang-jia/spring-hui-lu-chong-zao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="spring回炉重造">
+                        
+                        <span class="card-title">spring回炉重造</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/spring/" class="post-category">
+                                    spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 月明水清深<br />'
+            + '文章作者: zhuzhiyong<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    </script>
+<footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2024</span>
+            
+            <a href="/about" target="_blank">zhuzhiyong</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">156.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "4";
+                        var startDate = "9";
+                        var startHour = "12";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://www.beianx.cn/info/274669309276229" target="_blank">20220409324</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zzyong24" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1968286694@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1968286694" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1968286694" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

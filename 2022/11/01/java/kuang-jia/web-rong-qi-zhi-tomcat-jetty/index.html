@@ -1,0 +1,1653 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="web容器之tomcat/jetty, 月明水清深">
+    <meta name="description" content="web容器之tomcat/jetty1. web容器始末
+早期web应用主要是静态页面，HTTP服务器（如Apache、Nginx）负责返回静态HTML，浏览器负责解析HTML。
+由于早期web无法与服务器进行交互，因此SUN公司推出Ser">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+    <style>
+        body{
+            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+    <title>web容器之tomcat/jetty | 月明水清深</title>
+    <link rel="icon" type="image/png" href="/../medias/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="月明水清深" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/./medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">月明水清深</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/./medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">月明水清深</div>
+        <div class="logo-desc">
+            
+            添砖嘎娃
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zzyong24/zzyong24.github.io.git" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zzyong24/zzyong24.github.io.git" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">web容器之tomcat/jetty</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/web%E5%AE%B9%E5%99%A8/">
+                                <span class="chip bg-color">web容器</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/web%E5%AE%B9%E5%99%A8/" class="post-category">
+                                web容器
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-01
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-05-14
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="web容器之tomcat-x2F-jetty"><a href="#web容器之tomcat-x2F-jetty" class="headerlink" title="web容器之tomcat/jetty"></a>web容器之tomcat/jetty</h1><h2 id="1-web容器始末"><a href="#1-web容器始末" class="headerlink" title="1. web容器始末"></a>1. web容器始末</h2><ol>
+<li>早期web应用主要是静态页面，HTTP服务器（如Apache、Nginx）负责返回静态HTML，浏览器负责解析HTML。</li>
+<li>由于<code>早期web</code>无法与服务器进行交互，因此SUN公司推出Servlet技术（运行在服务端的Java小程序），Servlet无Main方法，只能运行在Web容器之中。</li>
+</ol>
+<p>Tomcat/Jetty本质上就是一个<code>web容器</code></p>
+<blockquote>
+<p>​    其他应用服务器包括：JBOSS或者WebLogic，不仅仅拥有Servlet功能，也包括EJB容器，是完整的Java EE应用服务器。</p>
+<p>​    从这个角度来看，Tomcat/jetty是一个轻量级的应用服务器。</p>
+</blockquote>
+<p>EJB:  是基于分布式事务处理的企业级应用程序的组件。Sun公司发布的文档中对EJB的定义是：EJB是用于开发和部署多层结构的、<code>分布式的</code>、面向对象的Java应用系统的<code>跨平台</code>的构件体系结构。</p>
+<h2 id="2-HTTP协议"><a href="#2-HTTP协议" class="headerlink" title="2. HTTP协议"></a>2. HTTP协议</h2><p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667283420936.png" alt="通信流程"></p>
+<p>HTTP: 约定了客户端（浏览器）与服务器端通信的格式。</p>
+<p><strong>请求与响应</strong></p>
+<p>​    Web服务器的核心工作便是：接收连接、解析请求、处理请求和发送响应四步，在此之上，并发能力是服务器的核心。</p>
+<p><strong>请求数据包</strong></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667283628840.png" alt="请求包"></p>
+<p><strong>响应数据包</strong></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667283646527.png" alt="响应包"></p>
+<blockquote>
+<p>​    Web服务器（Tomcat）将HTTP请求数据包封装为一个<code>Request</code>对象，将Request对象交给Web应用处理，并将处理结果封装为一个<code>Response</code>对象。</p>
+</blockquote>
+<p><strong>Cookie和Session</strong></p>
+<ol>
+<li><p>为什么需要？：<code>HTTP无状态</code>，并不知道当前访问浏览器的是谁。例如：你正在访问购物车，并添加了几件商品，正准备付款，不小心刷新了一下页面，由于HTTP无状态，服务器并不知道你是谁，因此也无法找到你刚才添加的商品。</p>
+</li>
+<li><p>是什么？：</p>
+<ul>
+<li><p>cookie： cookie是HTTP的一个请求头，存储在浏览器端，每次发送请求给服务器时，会携带上cookie信息。可以用于存储信息。</p>
+</li>
+<li><p>session：<code>cookie以明文存储，且存储在浏览器端（用户端）因此相当不安全</code>，session存储在<code>服务器端</code>。用户信息不在存储在cookie中，而是存储在session中。通过在cookie中设置<code>Session ID字段</code>，标注服务器中对应的Session，便可以标注当前访问用户的真实身份。</p>
+<p>优点包括：安全，节省网络流量</p>
+</li>
+<li><p>Tomcat Session管理器支持多种持久化方案存储session，包括redis集群，同时通过后台轮询线程定时删除过期session。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>HTTP1.1基于1.0升级了长连接，通过配置：Connection：keep-alive。（未配置每次发送都会建立新的连接，重复三次握手）</p>
+<h2 id="3-Servlet规范"><a href="#3-Servlet规范" class="headerlink" title="3. Servlet规范"></a>3. Servlet规范</h2><p>两个问题：</p>
+<ol>
+<li><p>HTTP服务器接收到请求，如何知道调用哪个类哪个方法来处理？</p>
+</li>
+<li><p>HTTP服务器如何知道哪个Servlet来处理。</p>
+<blockquote>
+<p>​    要回答第二个问题，先得回答第一个问题。</p>
+<p>​    显而易见，HTPP发送请求时，会携带请求资源路径，那么HTTP服务器收到请求资源路径后，怎么找到对应能够处理的类以及方法呢？通过if-else嘛，虽然可行，但是服务器和业务逻辑完全耦合了，因此不满足。</p>
+<p>​    解决方法便是：<code>通过定义Servlet接口，让所有能处理业务逻辑的类都实现Servlet接口，需要调用资源便调用Servlet接口实现类</code></p>
+<p>​    </p>
+<p>​    针对第二个问题，本质上是如何找到能处理该资源请求的Servlet接口，这个是<code>Servlet容器完成的</code></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667286186824.png" alt="资源请求与接口调用"></p>
+</blockquote>
+</li>
+</ol>
+<p><strong>Servlet规范：</strong>以上这一套业务处理Servlet实现类以及Servlet容器便是Servlet规范。</p>
+<p>帮助开发人员更关心如何实现业务逻辑，而不需要了解其中的细节。</p>
+<p><strong>Servlet接口</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Servlet</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">ServletConfig</span> var1<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">;</span>
+    <span class="token class-name">ServletConfig</span> <span class="token function">getServletConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">service</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> var1<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> var2<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> <span class="token function">getServletInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>核心方法便是service，用于处理业务逻辑</p>
+<p><strong>Servlet抽象类</strong></p>
+<p>GenericServlet</p>
+<p><strong>Servlet容器</strong></p>
+<blockquote>
+<p>​    Servlet容器收到请求后，负责调用对应的Servlet，若Servlet并未加载，则会基于<code>web.xml</code>配置文件加载对应的Servlet，加载完毕后，会将其放置在<code>ServletContext</code>全局环境之中。</p>
+</blockquote>
+<p><strong>拓展机制</strong></p>
+<ul>
+<li>Filter：请求进入时，会调用filter，并通过多个filter组成filter chain，串行调用filter</li>
+<li>Listener：监听如web应用启停、用户请求到达等</li>
+</ul>
+<p><strong>容器之间的关系</strong></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/20190503213508577.png" alt="servlet容器、spring容器、springmvc容器"></p>
+<p>web容器中有servlet容器，spring项目部署后存在spring容器。其中spring控制service层和dao层的bean对象以及controller层bean对象。servlet容器控制servlet对象。项目启动时，首先 servlet初始化，初始化过程中通过web.xml中spring的配置加载spring配置，初始化spring容器。待容器加载完成。servlet初始化完成，则完成启动。springmvc是viewAndModie的请求传递和结果解析。本身并没有容器管理，都是交给spring管理。<br>HTTP请求到达web容器后，会到达Servlet容器，容器通过分发器分发到具体的spring的Controller层。执行业务操作后返回结果。</p>
+<p><strong>核心类</strong></p>
+<p>Servlet接口、GenericServlet抽象类、HttpServlet</p>
+<h2 id="4-手写Servlet"><a href="#4-手写Servlet" class="headerlink" title="4. 手写Servlet"></a>4. 手写Servlet</h2><blockquote>
+<p>​    日常开发中我们可能都习惯与使用spring 以及 spring mvc等框架完成web开发，本章便使用纯手写继承HttpServlet的方式完成Web应用。</p>
+</blockquote>
+<p>开发步骤：</p>
+<ol>
+<li><p>下载并安装Tomcat（<a target="_blank" rel="noopener" href="https://mirrors.cnnic.cn/apache/tomcat/tomcat-8/v8.5.83/bin/%EF%BC%89">https://mirrors.cnnic.cn/apache/tomcat/tomcat-8/v8.5.83/bin/）</a></p>
+</li>
+<li><p>写Servlet</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServlet</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">PrintWriter</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HelloTomcat</span> <span class="token keyword">extends</span> <span class="token class-name">HttpServlet</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doGet</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> req<span class="token punctuation">,</span> <span class="token class-name">HttpServletResponse</span> resp<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span><span class="token punctuation">,</span> <span class="token class-name">IOException</span> <span class="token punctuation">{</span>
+        <span class="token comment">//设置流的默认编码 ISO-8859-1 设置为GDK</span>
+        resp<span class="token punctuation">.</span><span class="token function">setCharacterEncoding</span><span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//告诉浏览器, 服务器发送的消息体数据的编码. 建议浏览器使用该编码解码</span>
+        resp<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"content-type"</span><span class="token punctuation">,</span><span class="token string">"text/html;charset=utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//1. 获取字符输出流</span>
+        <span class="token class-name">PrintWriter</span> pw <span class="token operator">=</span> resp<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//2. 输出数据</span>
+        pw<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"&lt;h1&gt;hello tomcat&lt;/h1&gt;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>编译java文件（需要用到tomcat lib目录下的servlet-api.jar jar包）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">javac <span class="token operator">-</span>cp <span class="token punctuation">.</span>/servlet<span class="token operator">-</span>api<span class="token punctuation">.</span>jar <span class="token class-name">HelloTomcat</span><span class="token punctuation">.</span>java	<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>建立Web应用目录</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667292247696.png" alt="web应用目录"></p>
+</li>
+<li><p>编写web.xml</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>web-app</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://xmlns.jcp.org/xml/ns/javaee<span class="token punctuation">"</span></span> 
+                <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span> 
+                <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://xmlns.jcp.org/xml/ns/javaee
+                http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>WebApp_ID<span class="token punctuation">"</span></span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>4.0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>servlet</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>servlet-name</span><span class="token punctuation">&gt;</span></span>helloTomcat<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>servlet-name</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>servlet-class</span><span class="token punctuation">&gt;</span></span>HelloTomcat<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>servlet-class</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>servlet</span><span class="token punctuation">&gt;</span></span>
+
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>servlet-mapping</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>servlet-name</span><span class="token punctuation">&gt;</span></span>helloTomcat<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>servlet-name</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url-pattern</span><span class="token punctuation">&gt;</span></span>/hello<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url-pattern</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>servlet-mapping</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>web-app</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>完整文件讲解：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/mytJava/p/13143449.html">https://www.cnblogs.com/mytJava/p/13143449.html</a></p>
+</li>
+<li><p>拷贝完整项目（4中图示MyWebApp）到tomcat webapps下</p>
+</li>
+<li><p>启动tomcat（./bin/startup.sh)</p>
+</li>
+<li><p>访问资源</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> http://localhost:8080/MyWebApp/hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>疑问：Servlet和HttpServlet什么关系，难道可以支持除Http之外的协议吗？</p>
+<p>解答：Tomcat支持HTTP/1.1、AJP（用于和web服务器集成如nginx）、HTTP/2.0等。（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/alimayun/p/10604532.html%EF%BC%89">https://www.cnblogs.com/alimayun/p/10604532.html）</a></p>
+<p><strong>基于注解配置Servlet</strong></p>
+<ol>
+<li>删除上面配置的<code>web.xml</code>文件</li>
+<li>使用注解<code>@WebServlet（【urlMapping】）</code></li>
+</ol>
+<p><strong>tomcat日志</strong></p>
+<ul>
+<li><code>catalina.*.out</code>: tomcat启动日志，启动过程中的配置错误都会在这里。</li>
+<li><code>localhost.*.out</code>: web在初始化过程中未处理的异常。</li>
+<li><code>localhost_access_log.*.out</code>: 请求日志，包括IP、请求路径、时间、请求协议、状态码等。</li>
+<li><code>manager.*.log</code>：存放tomcat自带的manager日志。</li>
+</ul>
+<h2 id="5-系统架构之连接器"><a href="#5-系统架构之连接器" class="headerlink" title="5. 系统架构之连接器"></a>5. 系统架构之连接器</h2><p><strong>Tomcat核心功能</strong>：</p>
+<ol>
+<li>处理socket连接，负责网络字节流Request和Response对象的转化。（<code>连接器</code>）</li>
+<li>加载和管理Servlet，以及具体的Request请求。（<code>容器</code>）</li>
+</ol>
+<p><strong>Tomcat支持的I/O模型</strong>：</p>
+<ol>
+<li>NIO：非阻塞I/O，采用Java NIO类库实现</li>
+<li>NIO.2：异步I/O，采用JDK7最新NIO.2类库实现</li>
+<li>APR：采用Apache可移植运行库实现，是C/C++编写的本地库</li>
+</ol>
+<p><strong>Tomcat支持的应用层协议</strong>：</p>
+<ol>
+<li><p>HTTP/1.1：目前大部分的Web应用使用的协议</p>
+</li>
+<li><p>AJP：用于和Web服务器如Apache、Nginx集成</p>
+</li>
+<li><p>HTTP/2.0：HTTP2.0相较于1.0大幅度提升了性能</p>
+<blockquote>
+<p>​    什么是Web服务器，和Tomcat有什么区别。一直说Apache和Nginx是Web服务器，其实Web服务器即静态资源服务器，而Tomcat是Java服务器，支持JSP以及Servlet。</p>
+<p>​    <strong>Apache</strong>：</p>
+<p>​    1、主要用于解析静态文本，并发性能高，侧重于HTTP服务；</p>
+<p>​    2、支持静态页（HTML），不支持动态请求如：CGI、Servlet/JSP、PHP、ASP等；</p>
+<p>​    3、具有很强的可扩展性，可以通过插件支持PHP，还可以单向Apache连接Tomcat实现连通；</p>
+<p>​    4、Apache是世界使用排名第一的Web服务器。</p>
+<p>​    <strong>Tomcat</strong>：</p>
+<p>​    特性：免费的Java应用服务器</p>
+<p>​    1、主要用于解析JSP/Servlet，侧重于Servlet引擎；</p>
+<p>​    2、支持静态页，但效率没有Apache高；支持Servlet、JSP请求；</p>
+<p>​    3、Tomcat本身也内置了一个HTTP服务器用于支持静态内容，可以通过Tomcat的配置管理工具实现与Apache整合。</p>
+<p>​    两者整合后优点：如果请求是静态网页则由Apache处理，并将结果返回；如果是动态请求，Apache会将解析工作转发给Tomcat处理，Tomcat处理后将结果通过Apache返回。这样可以达到分工合作，实现负载远衡，提高系统的性能。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>Tomcat、Service、连接器、容器</strong></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667353115418.png" alt="tomcat组件关系"></p>
+<ul>
+<li><p>tomcat中包含多个service。（service只是对连接器以及容器的封装，每个service独占端口，可以理解为一个service对应一个web应用）</p>
+</li>
+<li><p>一个service中包含一个容器和多个连接器，连接器与容器之间使用标准ServletRequest以及ServletResponse通信。（多个连接器是为了适配多种网络协议以及I/O模型的搭配）</p>
+<blockquote>
+<p>​    连接器核心工作：</p>
+<p>​        对Servlet容器屏蔽协议以及I/O模型的差异，无论是HTTP还是AJP，在容器中获取的都是标准的ServletRequest对象。</p>
+<p>​    细化：</p>
+<ol>
+<li>监听网络端口</li>
+<li>接收网络请求</li>
+<li>读取网络字节流</li>
+<li>根据具体的网络协议解析字节流（HTTP/AJP），并封装为统一的Tomat Request对象</li>
+<li>将Tomcat Request对象转换为标准的ServletRequest</li>
+<li>调用Servlet容器业务接口，得到Servlet Response</li>
+<li>将Servlet Response转换为Tomcat Response对象</li>
+<li>将Tomcat Response转换为网络字节流</li>
+<li>将响应字节流写回给浏览器端</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p><strong>连接器核心功能</strong></p>
+<ol>
+<li>网络通信</li>
+<li>应用层协议解析</li>
+<li>Tomcat Request/Response 与 Servlet Request/Response的转化</li>
+</ol>
+<p>因此Tomcat设计了三个组件（<code>接口</code>）来实现这三个功能：Endpoint、Processor、Adapter</p>
+<ul>
+<li><p><code>Endpoint</code>：负责网络通信，将接受到的请求字节流提供给<code>Processor</code></p>
+</li>
+<li><p><code>Processor</code>：负责解析<code>Endpoint</code>传送的字节流，并将其封装为<code>Tomcat Request</code>对象给<code>Adapter</code></p>
+</li>
+<li><p><code>Adapter</code>：负责解析<code>Processor</code>传送的<code>Tomcat Request</code>对象，并封装为<code>Servlet request</code>提供给<code>容器</code></p>
+<blockquote>
+<p>​    分别需要考虑的变化点包括：</p>
+<ol>
+<li>Endpoint： 需要支持不同的I/O模型，包括<code>NIO、NIO.2、APR</code></li>
+<li>Processor：需要支持解析不同的<code>网络协议</code>，并基于协议将字节流封装为<code>Tomcat Request</code>对象，协议包括：<code>HTTP1.1、HTTP2.0、JAP</code></li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p>如果需要实现<code>NIO Endpoint</code>，则只需要实现接口<code>Endpoint</code>，其他同理。若以后出现了I/O模型或者网络协议，只需要新的实现即可。</p>
+<p><strong>适配Endpoint和Processor的多种组合</strong></p>
+<p>​    前面提到，Endpoint以及Processor接口需要适配多种I/O模型或者网络协议，因此为了任意搭配Endpoint以及Processor，Tomcat设计者使用了ProtocalHandler接口用来组合Endpoint以及Processor。例如：<code>HTTP11NioProtocal</code>和<code>AJPNioProtocal</code></p>
+<p>​    除了这些变化点（Endpoint以及Processor），系统中也存在一些相对稳定的部分，因此使用抽象类用来封装稳定的部分。整体类图如下：</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667356824430.png" alt="Protocal类图"></p>
+<p><strong>连接器整体架构</strong></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667357524300.png" alt="连接器架构"></p>
+<p><strong>ProtocolHandler组件</strong></p>
+<ol>
+<li><p>Endpoint</p>
+<blockquote>
+<p>​    功能：实现TCP/IP协议，Socket接收和发送处理器</p>
+<p>​    继承关系：Endpoint（接口）-&gt; AbstractEndpoint（抽象类）-&gt; NioEndpoint等（实现类）</p>
+<p>​    子组件：</p>
+<ul>
+<li>Acceptor：监听Socket请求</li>
+<li>SocketProcessor：处理接受到的Socket请求（实现了Runnable接口）</li>
+</ul>
+</blockquote>
+</li>
+<li><p>Processor</p>
+<blockquote>
+<p>​    功能：实现HTTP协议，负责转换Socket字节流为Tomcat Request对象，通过Adapter交给容器进行处理</p>
+<p>​    继承关系：Processor（接口）-&gt; AbstractProcessor（抽象类）-&gt; HTTP11Processor(实现类)</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667463275286.png" alt="连接器组件图"></p>
+<p><strong>Adapter</strong></p>
+<p>Adapter组件核心功能是将Processor传输过来的Tomcat Request对象，转换为Servlet Request对象，并交给容器。（<code>设计模式：适配器模式</code>）</p>
+<p>具体实现是：<code>CoyoteAdater</code></p>
+<p><strong>架构设计原则</strong></p>
+<p><code>根据高内聚、低耦合原则确定子模块，找出模块中的变化点和不变点，用接口封装变化点（子类实现自己的）、抽象类定义模板方法实现变化点。</code></p>
+<h2 id="6-系统架构之容器"><a href="#6-系统架构之容器" class="headerlink" title="6. 系统架构之容器"></a>6. 系统架构之容器</h2><p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667465739525.png" alt="容器层级关系"></p>
+<blockquote>
+<p>​    tomcat设计了四层容器，彼此之间是<code>包含关系</code>。</p>
+<ul>
+<li>Wrapper：Servlet接口（写的Controller接口）</li>
+<li>Context：一个Web应用程序（webapps模块下一个应用）</li>
+<li>Host：一个虚拟主机或一个站点</li>
+<li>Engine：引擎</li>
+</ul>
+<p>其中Host以及Engine的概念比较陌生，一个Tomcat容器只存在一个Engine引擎，而一个Engine引擎存在多个Host虚拟主机</p>
+</blockquote>
+<p>tomcat配置文件server.xml</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667466252039.png" alt="server.xml"></p>
+<p><strong>容器管理</strong></p>
+<p>Tomcat中存在四层容器，容器之间有着明显的父子关系，通过组合模式，以及父子节点的设计，并抽象统一接口，能够一致看待外层容器（父容器）和内层容器（子容器）。容器接口如下：</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667467503397.png" alt="容器接口"></p>
+<p><strong>资源映射</strong></p>
+<p>上文提到，一个Tomcat Engine包含多个Host<code>（IP+端口 - 域名）</code>，一个Host包含多个Context<code>（web应用）</code>，一个Context包含多个Wrapper<code>（Servlet）</code></p>
+<p>这些是一个树状的层级结构，Tomcat提供了<code>Mapper</code>组件来保存这些映射关系（Map）。</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667468212754.png" alt="Mapper"></p>
+<p><strong>资源定位步骤</strong></p>
+<ol>
+<li><p>根据协议和端口号选择Service和Engine</p>
+<blockquote>
+<p>Service中存在一个Connector和一个Engine，每个连接器监听的端口号都不一致。如HTTP连接器默认监听8080端口，而AJP连接器默认监听8009端口。因此协议和端口已经确定好了Service，而Service确定好了也就确定好了Engine。</p>
+</blockquote>
+</li>
+<li><p>根据域名选择Host</p>
+</li>
+<li><p>根据URL选择Context以及Wrapper</p>
+</li>
+</ol>
+<p><strong>Pipeline - Value</strong></p>
+<p>请求的处理有一定的顺序，如从Connector -&gt; Engine -&gt; Host -&gt; Context -&gt; Wrapper</p>
+<p>而容器之间又是分层的，因此这一系列的处理需要通过一个<code>链路串起来</code>，Tomcat使用到了<code>责任链模式</code></p>
+<p><code>Value</code>表示其中一个处理节点，<code>Pipeline</code>负责将多个<code>Value</code>节点串起来。</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667470030847.png" alt="value"></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667470041619.png" alt="Pipeline"></p>
+<p>跨容器的链条通过Basic串通</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667470086082.png" alt="pipeline - value调用关系"></p>
+<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667476837683.png" alt="架构"></p>
+<p>其中红色箭头虚线表示请求在Tomcat中流转的过程。</p>
+<h2 id="7-一键式启停"><a href="#7-一键式启停" class="headerlink" title="7. 一键式启停"></a>7. 一键式启停</h2><p>上图整体架构静态的描述了组件之间的关系，一个完整的系统需要创建并组装这些组件；在服务停止的时候，还需要关闭并停止这些组件。这是一个动态的过程。而如何优雅的管理组件的创建、初始化、启动、停止和销毁？是我们需要思考的问题。</p>
+<p>从静态结构图分析来看，有两点：</p>
+<ol>
+<li>组件之间有大有小，大的组件管理小的组件，比如Server管理Servise，Service又管理连接器和容器。</li>
+<li>组件有内有外，外层组件控制内层组件，比如连接器是外层组件，外层组件调用内层组件完成业务功能。也就是说，<strong>请求的处理过程是由外层组件来驱动的</strong></li>
+</ol>
+<p>根据这两个特点来总结，决定了系统再创建组件时需要遵循一定的原则：</p>
+<ol>
+<li>原则1：先创建子组件，再创建父组件。子组件需要被注入到父组件当中。</li>
+<li>原则2：先创建内层组件，再创建外层组件，内层组件需要被注入到外层组件当中。</li>
+</ol>
+<p><strong>尝试1：按照先小再大，先内再外顺序创建</strong><br>    很直观的做法就是按照小-&gt;大，内-&gt;外的顺序原则创建组件，但是这样处理会导致代码逻辑的混乱，也容易造成组件的遗漏，因此不太合适。</p>
+<p><strong>一键式启停：Lifecycle</strong></p>
+<p><code>设计的原则便在于：找到系统的变化点和不变点。这里的不变点便是：每个组件都要经历创建、初始化和启动这几个过程，变化的是初始化做的具体的事情不一样</code></p>
+<p>因此，可以抽象出一个接口，用于声明这些不变的点</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667479316839.png" alt="Lifecycle"></p>
+<p>理所当然，在父组件中调用 init方法，子组件中也会执行。其他同理，我们可以调用最顶层组件的接口，来启动完整的所有的组件。</p>
+<p><strong>可拓展的LifeCycle</strong></p>
+<p>上面说到父组件的LifeCycle API被执行，子组件的也会被执行。那如果我们想要拓展子组件方法的内容呢，是不是可能得改动现有的组件API。因此，<code>上述说明的父组件调用init方法，子组件也会执行，并不是父组件调用子组件，而是通过设计模式：观察者模式，给子组件注册监听器，自动调用子组件的API</code></p>
+<p><strong>可重用的LifeCycleBase</strong></p>
+<p>LifeCycleBase抽象类抽象了一些公共的逻辑，包括初始化、启动、停止以及销毁。LifeCycleBase实现了LifeCycle接口，并抽象了一些共用方法，这边是典型的<code>设计模式：模板方法模式</code></p>
+<p>示例（LifeCycleBase）：</p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667479753752.png" alt="init监听器的触发"></p>
+<p><strong>何时注册监听器</strong></p>
+<p>分为两种情况：</p>
+<ul>
+<li><p>Tomcat 自定义了一些监听器，这些监听器是父组件在创建子组件的过程中注册到子组件的。比如 MemoryLeakTrackingListener 监听器，用来检测 Context 容器中的内存泄漏，这个监听器是 Host 容器在创建 Context 容器时注册到 Context 中的。</p>
+</li>
+<li><p>我们还可以在server.xml中定义自己的监听器，Tomcat 在启动时会解析server.xml，创建监听器并注册到容器组件。生周期管理总体类图</p>
+</li>
+</ul>
+<p><strong>类图</strong></p>
+<p><img src="/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/1667479900598.png" alt="类图"></p>
+<h2 id="可参考文章"><a href="#可参考文章" class="headerlink" title="可参考文章"></a>可参考文章</h2><ol>
+<li>Tomcat源码分析：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanshaoshenghao/p/10932306.html">https://www.cnblogs.com/tanshaoshenghao/p/10932306.html</a></li>
+<li>Tomcat内嵌式启动：<a target="_blank" rel="noopener" href="https://github.com/heroku/devcenter-embedded-tomcat">https://github.com/heroku/devcenter-embedded-tomcat</a></li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">zhuzhiyong</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zzyong24.github.io/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/">https://zzyong24.github.io/2022/11/01/java/kuang-jia/web-rong-qi-zhi-tomcat-jetty/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">zhuzhiyong</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/web%E5%AE%B9%E5%99%A8/">
+                                    <span class="chip bg-color">web容器</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12/12/gong-zuo/202207-bei-jing-da-shu-yuan/zhai-wu-yu-yi-ti-hua-xi-tong-rong-he/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="债务与一体化系统融合">
+                        
+                        <span class="card-title">债务与一体化系统融合</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%9C%B0%E6%96%B9%E6%94%BF%E5%BA%9C%E5%80%BA%E5%8A%A1/" class="post-category">
+                                    地方政府债务
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E4%BD%9C/">
+                        <span class="chip bg-color">工作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/01/java/ji-chu/java-pa-chong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="java爬虫">
+                        
+                        <span class="card-title">java爬虫</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%88%AC%E8%99%AB/" class="post-category">
+                                    爬虫
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%88%AC%E8%99%AB/">
+                        <span class="chip bg-color">爬虫</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 月明水清深<br />'
+            + '文章作者: zhuzhiyong<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    </script>
+<footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2024</span>
+            
+            <a href="/about" target="_blank">zhuzhiyong</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">156.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "4";
+                        var startDate = "9";
+                        var startHour = "12";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://www.beianx.cn/info/274669309276229" target="_blank">20220409324</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zzyong24" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1968286694@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1968286694" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1968286694" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

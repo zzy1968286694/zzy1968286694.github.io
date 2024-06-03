@@ -1,0 +1,2501 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="债务系统-限额流程, 月明水清深">
+    <meta name="description" content="债务系统-限额管理整体流程：财政部下达-》省部接收—》省部分解-》省部下达-》市区接收
+
+
+
+限额类型
+DATA_TYPE
+
+
+
+新增债券限额
+01
+
+
+再融资债券限额
+03
+
+
+债券总限额
+04
+
+
+
+
+
+单据类型
+BILL_TYPE
+
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+    <style>
+        body{
+            background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+    <title>债务系统-限额流程 | 月明水清深</title>
+    <link rel="icon" type="image/png" href="/../medias/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.1.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="月明水清深" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/./medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">月明水清深</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/./medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">月明水清深</div>
+        <div class="logo-desc">
+            
+            添砖嘎娃
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zzyong24/zzyong24.github.io.git" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zzyong24/zzyong24.github.io.git" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">债务系统-限额流程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%B7%A5%E4%BD%9C/">
+                                <span class="chip bg-color">工作</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%9C%B0%E6%96%B9%E6%94%BF%E5%BA%9C%E5%80%BA%E5%8A%A1/" class="post-category">
+                                地方政府债务
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-04-12
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-05-14
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    12 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="债务系统-限额管理"><a href="#债务系统-限额管理" class="headerlink" title="债务系统-限额管理"></a>债务系统-限额管理</h1><p>整体流程：财政部下达-》省部接收—》省部分解-》省部下达-》市区接收</p>
+<table>
+<thead>
+<tr>
+<th>限额类型</th>
+<th>DATA_TYPE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>新增债券限额</td>
+<td>01</td>
+</tr>
+<tr>
+<td>再融资债券限额</td>
+<td>03</td>
+</tr>
+<tr>
+<td>债券总限额</td>
+<td>04</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>单据类型</th>
+<th>BILL_TYPE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接收</td>
+<td>01</td>
+</tr>
+<tr>
+<td>限额分解</td>
+<td>02</td>
+</tr>
+<tr>
+<td>调整接收</td>
+<td>03</td>
+</tr>
+<tr>
+<td>总限额调整</td>
+<td>04</td>
+</tr>
+</tbody></table>
+<p><strong>核心表：BAS_MOF_DIV</strong></p>
+<table>
+<thead>
+<tr>
+<th><em><strong>*序号*</strong></em></th>
+<th><em><strong>*字段名称*</strong></em></th>
+<th><em><strong>*中文名称*</strong></em></th>
+<th><em><strong>*类型*</strong></em></th>
+<th><em><strong>*长度*</strong></em></th>
+<th><em><strong>*强制/可选*</strong></em></th>
+<th><em><strong>*库表要素编号*</strong></em></th>
+<th><em><strong>*备注*</strong></em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>MOF_DIV_ID</td>
+<td>财政区划主键</td>
+<td>String</td>
+<td>38</td>
+<td>M</td>
+<td>BE00001</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MOF_DIV_CODE</td>
+<td>财政区划代码</td>
+<td>NString</td>
+<td>9</td>
+<td>M</td>
+<td>BE00017</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>MOF_DIV_NAME</td>
+<td>财政区划名称</td>
+<td>GBString</td>
+<td>100</td>
+<td>M</td>
+<td>BE00016</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>PARENT_ID</td>
+<td>父级节点主键</td>
+<td>String</td>
+<td>38</td>
+<td>M</td>
+<td>BE00031</td>
+<td>父级信息项主键</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LEVEL_NO</td>
+<td>级次</td>
+<td>Integer</td>
+<td>2</td>
+<td>M</td>
+<td>BE00018</td>
+<td>当前信息项级次</td>
+</tr>
+<tr>
+<td>6</td>
+<td>IS_LEAF</td>
+<td>是否末级</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00019</td>
+<td>当前信息项是否为末级节点</td>
+</tr>
+<tr>
+<td>7</td>
+<td>START_DATE</td>
+<td>启用日期</td>
+<td>Date</td>
+<td></td>
+<td>M</td>
+<td>BE00020</td>
+<td>启用日期YYYYMMDD</td>
+</tr>
+<tr>
+<td>8</td>
+<td>END_DATE</td>
+<td>停用日期</td>
+<td>Date</td>
+<td></td>
+<td>M</td>
+<td>BE00021</td>
+<td>结束日期YYYYMMDD</td>
+</tr>
+<tr>
+<td>9</td>
+<td>IS_ENABLED</td>
+<td>是否启用</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00022</td>
+<td>是否启用</td>
+</tr>
+<tr>
+<td>10</td>
+<td>UPDATE_TIME</td>
+<td>更新时间</td>
+<td>DateTime</td>
+<td></td>
+<td>M</td>
+<td>BE00023</td>
+<td>维护本条信息项的更新时间</td>
+</tr>
+<tr>
+<td>11</td>
+<td>IS_DELETED</td>
+<td>是否删除</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00030</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>ADM_DIV_CODE</td>
+<td>行政区划代码</td>
+<td>NString</td>
+<td>9</td>
+<td>O</td>
+<td>BE00015</td>
+<td>无对应的行政区划代码的时候为空</td>
+</tr>
+<tr>
+<td>13</td>
+<td>MOF_DIV_TYPE</td>
+<td>行政区划类型</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00032</td>
+<td>1：中央2：省3：计划单列市4：市5：区（县）级51：省直管县52：其他县6：乡级</td>
+</tr>
+<tr>
+<td>14</td>
+<td>IS_ADMDIV</td>
+<td>是否行政区划</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00002</td>
+<td>当区划是类似开发区等不存在的新政区划</td>
+</tr>
+<tr>
+<td>15</td>
+<td>PARENT_ADM_DIV_CODE</td>
+<td>上级行政区划代码</td>
+<td>NString</td>
+<td>9</td>
+<td>O</td>
+<td>BE00015</td>
+<td>为中央的时候为空</td>
+</tr>
+<tr>
+<td>16</td>
+<td>IS_STANDARD</td>
+<td>是否标准</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00035</td>
+<td>0标准代码集1扩展代码集</td>
+</tr>
+<tr>
+<td>17</td>
+<td>CREATE_TIME</td>
+<td>创建时间</td>
+<td>DateTime</td>
+<td></td>
+<td>M</td>
+<td>BE00036</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>核心表：BAS_DEBT_LIMIT</strong></p>
+<table>
+<thead>
+<tr>
+<th><em><strong>*序号*</strong></em></th>
+<th><em><strong>*字段名称*</strong></em></th>
+<th><em><strong>*中文名称*</strong></em></th>
+<th><em><strong>*类型*</strong></em></th>
+<th><em><strong>*长度*</strong></em></th>
+<th><em><strong>*强制/可选*</strong></em></th>
+<th><em><strong>*库表要素编号*</strong></em></th>
+<th><em><strong>*备注*</strong></em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>DEBT_LIMIT_ID</td>
+<td>债务限额调整唯一标识</td>
+<td>String</td>
+<td>38</td>
+<td>M</td>
+<td>BE00001</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MOF_DIV_CODE</td>
+<td>来源方财政区划代码</td>
+<td>NString</td>
+<td>9</td>
+<td>M</td>
+<td>BE00017</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>REC_DIV_CODE</td>
+<td>接收方财政区划代码</td>
+<td>NString</td>
+<td>9</td>
+<td>M</td>
+<td>BE00017</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>FISCAL_YEAR</td>
+<td>预算年度</td>
+<td>NString</td>
+<td>4</td>
+<td>M</td>
+<td>BE00029</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>LIMIT_TYPE</td>
+<td>限额类型</td>
+<td>String</td>
+<td>1</td>
+<td>0</td>
+<td></td>
+<td>限额类型：1当年限额2上年结转限额</td>
+</tr>
+<tr>
+<td>6</td>
+<td>BATCH_NO</td>
+<td>进行调整的限额批次</td>
+<td>String</td>
+<td>38</td>
+<td>M</td>
+<td>BE12113</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>REC_DATE</td>
+<td>接收日期</td>
+<td>Date</td>
+<td>8</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>SPECIAL_DEBT_LIMIT</td>
+<td>专项债务限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td>专项债务限额，专项债务历年累计限额</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SPECIAL_DEBT_BAL</td>
+<td>专项债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td>GENERAL_DEBT_LIMIT</td>
+<td>一般债务限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td>一般债务限额，一般债务历年累计限额</td>
+</tr>
+<tr>
+<td>11</td>
+<td>GENERAL_DEBT_BAL</td>
+<td>一般债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>NEW_SPEDEBT_LIMIT</td>
+<td>新增专项债务限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td>新增专项债务限额，新增专项债务限额包括土地储备专项债务限额、收费公路专项债务限额、棚改专项债务限额和其他专项债务限额。</td>
+</tr>
+<tr>
+<td>13</td>
+<td>NEW_SPEDEBT_BAL</td>
+<td>新增专项债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>LANDBANK_DEBT_LIMIT</td>
+<td>土地储备专项债务限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>15</td>
+<td>LANDBANK_DEBT_BAL</td>
+<td>土地储备专项债余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>16</td>
+<td>TURNPIKE_DEBT_LIMIT</td>
+<td>收费公路专项债务限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>17</td>
+<td>TURNPIKE_DEBT_BAL</td>
+<td>收费公路专项债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>18</td>
+<td>SHEDREFORM_DEBT_LIMIT</td>
+<td>棚改专项债务限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>19</td>
+<td>SHEDREFORM_DEBT_BAL</td>
+<td>棚改专项债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>20</td>
+<td>OTHER_SPEDEBT_LIMIT</td>
+<td>其他专项债务限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>21</td>
+<td>OTHER_SPEDEBT_BAL</td>
+<td>其他专项债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>22</td>
+<td>NEW_GENDEBT_LIMIT</td>
+<td>新增一般债务限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>23</td>
+<td>NEW_GENDEBT_BAL</td>
+<td>新增一般债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>24</td>
+<td>FOREIGN_DEBT_LIMIT</td>
+<td>其中外债限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>25</td>
+<td>SPEDEBT_EXPREFIN_LIMIT</td>
+<td>专项债券到期再融资限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>26</td>
+<td>REPSPE_REFIN_LIMIT</td>
+<td>置换专项债券到期再融资限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>27</td>
+<td>NEWSPE_REFIN_LIMIT</td>
+<td>新增专项债券到期再融资限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>28</td>
+<td>REFSPE_REP_LIMIT</td>
+<td>用于偿还置换专项债券的再融资债券到期再融资限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>29</td>
+<td>REFSPE_NEWSPE_LIMIT</td>
+<td>用于偿还新增专项债券的再融资债券到期再融资限额调整额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>30</td>
+<td>SPEDEBT_EXPREFIN_BAL</td>
+<td>专项债券到期再融资余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>31</td>
+<td>OTHDEBT_EXPREFIN_LIMIT</td>
+<td>其他债券到期再融资限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>32</td>
+<td>REPGEN_REFIN_LIMIT</td>
+<td>置换一般债券到期再融资限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>33</td>
+<td>NEWGEN_REFIN_LIMIT</td>
+<td>新增一般债券到期再融资限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>34</td>
+<td>REFGEN_REP_LIMIT</td>
+<td>用于偿还置换一般债券的再融资债券到期再融资限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>35</td>
+<td>REFGEN_NEWSPE_LIMIT</td>
+<td>用于偿还新增一般债券的再融资债券到期再融资限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>M</td>
+<td>BE00009</td>
+<td></td>
+</tr>
+<tr>
+<td>36</td>
+<td>OTHDEBT_EXPREFIN_BAL</td>
+<td>其他债券到期再融资余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>REPDEBT_LIMIT</td>
+<td>置换债务限额</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>38</td>
+<td>REPDEBT_BAL</td>
+<td>置换债务余额，接收方根据发行进度更新（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>39</td>
+<td>UPDATE_TIME</td>
+<td>更新时间</td>
+<td>DateTime</td>
+<td>16</td>
+<td>M</td>
+<td>BE00023</td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td>40</td>
+<td>IS_DELETED</td>
+<td>是否删除</td>
+<td>Integer</td>
+<td>1</td>
+<td>M</td>
+<td>BE00030</td>
+<td>是否删除 (1:删除 2:未删除 默认值2)</td>
+</tr>
+<tr>
+<td>41</td>
+<td>CREATE_TIME</td>
+<td>创建时间</td>
+<td>DateTime</td>
+<td>16</td>
+<td>M</td>
+<td>BE00036</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>42</td>
+<td>LIMIT</td>
+<td>债务限额（废弃）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>43</td>
+<td>MOF_AD_CODE</td>
+<td>来源方财政区划代码(9位)</td>
+<td>String</td>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>44</td>
+<td>REC_AD_CODE</td>
+<td>接收方财政区划代码(9位)</td>
+<td>String</td>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>45</td>
+<td>HYZW_AMT</td>
+<td>或有债务</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>46</td>
+<td>BILL_TYPE</td>
+<td>单据类型</td>
+<td>String</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td>单据类型，01接收，02限额分解，03调整接收，04总限额调整</td>
+</tr>
+<tr>
+<td>47</td>
+<td>DATA_TYPE</td>
+<td>数据类型</td>
+<td>NString</td>
+<td>2</td>
+<td>O</td>
+<td></td>
+<td>01新增、03再融资、04总限额</td>
+</tr>
+<tr>
+<td>48</td>
+<td>CREATE_USER</td>
+<td>创建人</td>
+<td>String</td>
+<td>30</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>49</td>
+<td>UPDATE_USER</td>
+<td>修改人</td>
+<td>String</td>
+<td>30</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>50</td>
+<td>WF_ID</td>
+<td>工作流ID</td>
+<td>NString</td>
+<td>8</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>51</td>
+<td>WF_STATUS</td>
+<td>工作流状态</td>
+<td>NString</td>
+<td>20</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>52</td>
+<td>NODE_CURRENT_ID</td>
+<td>当前处理节点</td>
+<td>NString</td>
+<td>8</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>53</td>
+<td>NODE_NEXT_ID</td>
+<td>下一处理节点</td>
+<td>NString</td>
+<td>8</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>54</td>
+<td>IS_END</td>
+<td>流程是否结束</td>
+<td>NString</td>
+<td>1</td>
+<td>O</td>
+<td></td>
+<td>0未结束，1已结束</td>
+</tr>
+<tr>
+<td>55</td>
+<td>IS_XD</td>
+<td>限额是否已下达</td>
+<td>String</td>
+<td>1</td>
+<td>0</td>
+<td></td>
+<td>默认0</td>
+</tr>
+<tr>
+<td>56</td>
+<td>HOLD1</td>
+<td>备用字段1</td>
+<td>String</td>
+<td>38</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>57</td>
+<td>HOLD2</td>
+<td>备用字段2</td>
+<td>String</td>
+<td>38</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>58</td>
+<td>HOLD3</td>
+<td>备用字段3</td>
+<td>String</td>
+<td>38</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>59</td>
+<td>HOLD4</td>
+<td>备用字段4</td>
+<td>String</td>
+<td>38</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>60</td>
+<td>HOLD5</td>
+<td>备用字段5</td>
+<td>String</td>
+<td>38</td>
+<td>O</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>61</td>
+<td>BATCH_TYPE</td>
+<td>批次类型</td>
+<td>NString</td>
+<td>2</td>
+<td>O</td>
+<td></td>
+<td>01正式批次 02提前批次 默认值01</td>
+</tr>
+<tr>
+<td>62</td>
+<td>SPECIAL_LIMIT_OLD</td>
+<td>专项债务限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>63</td>
+<td>GENERAL_LIMIT_OLD</td>
+<td>一般债务限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>64</td>
+<td>NEW_SPE_LIMIT_OLD</td>
+<td>新增专项债务限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>65</td>
+<td>NEW_GEN_LIMIT_OLD</td>
+<td>新增一般债务限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>66</td>
+<td>FOREIGN_LIMIT_OLD</td>
+<td>外债限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>67</td>
+<td>REPSPE_REFIN_LIMIT_OLD</td>
+<td>置换专项债券到期再融资限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>68</td>
+<td>NEWSPE_REFIN_LIMIT_OLD</td>
+<td>新增专项债券到期再融资限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>69</td>
+<td>REFSPE_REP_LIMIT_OLD</td>
+<td>用于偿还置换专项债券的再融资债券到期再融资限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>70</td>
+<td>REFSPE_NEWSPE_LIMIT_OLD</td>
+<td>用于偿还新增专项债券的再融资债券到期再融资限额调整额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>71</td>
+<td>REPGEN_REFIN_LIMIT_OLD</td>
+<td>置换一般债券到期再融资限额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>72</td>
+<td>NEWGEN_REFIN_LIMIT_OLD</td>
+<td>新增一般债券到期再融资限额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>73</td>
+<td>REFGEN_REP_LIMIT_OLD</td>
+<td>用于偿还置换一般债券的再融资债券到期再融资限额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>74</td>
+<td>REFGEN_NEWSPE_LIMIT_OLD</td>
+<td>用于偿还新增一般债券的再融资债券到期再融资限额（调整前）</td>
+<td>Currency</td>
+<td>20,2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="新增债务限额"><a href="#新增债务限额" class="headerlink" title="新增债务限额"></a>新增债务限额</h2><h3 id="列表查询"><a href="#列表查询" class="headerlink" title="列表查询"></a>列表查询</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> T<span class="token punctuation">.</span>FISCAL_YEAR<span class="token punctuation">,</span>
+       AD<span class="token punctuation">.</span>NAME                              <span class="token keyword">AS</span>                                     AD_NAME<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>BATCH_NO                           <span class="token keyword">AS</span>                                     BATCH_NO<span class="token punctuation">,</span>
+       <span class="token punctuation">(</span>NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_GENDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">10000</span> <span class="token operator">+</span> NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">10000</span><span class="token punctuation">)</span> HJ<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_GENDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">10000</span>  <span class="token keyword">AS</span>                                     NEW_GENDEBT_LIMIT<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">10000</span> <span class="token keyword">AS</span>                                     FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">10000</span>  <span class="token keyword">AS</span>                                     NEW_SPEDEBT_LIMIT
+<span class="token keyword">FROM</span> BAS_DEBT_V_LIMIT T
+         <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> DSY_V_ELE_AD AD <span class="token keyword">ON</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> AD<span class="token punctuation">.</span>CODE
+<span class="token keyword">WHERE</span> T<span class="token punctuation">.</span>BILL_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>DATA_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> <span class="token number">42</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token operator">=</span> <span class="token number">2022</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> T<span class="token punctuation">.</span>REC_DATE <span class="token keyword">DESC</span><span class="token punctuation">,</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token keyword">DESC</span><span class="token punctuation">,</span> T<span class="token punctuation">.</span>BATCH_NO <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>核心表：</p>
+<p><code>债务限额表 BAS_DEBT_LIMIT</code></p>
+<p><code>基础数据表 区划表 BAS_MOF_DIV</code></p>
+<pre class="line-numbers language-none"><code class="language-none">page: 1 			分页
+limit: 20			分页
+start: 0			分页
+fiscal_year: 2022	年份
+batch_no: 			批号
+dw: 3				单位
+mhcx: <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="限额接收"><a href="#限额接收" class="headerlink" title="限额接收"></a>限额接收</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> DEBT_LIMIT_ID<span class="token punctuation">,</span>
+       REC_DIV_CODE<span class="token punctuation">,</span>
+       FISCAL_YEAR<span class="token punctuation">,</span>
+       LIMIT_TYPE<span class="token punctuation">,</span>
+       CONCAT<span class="token punctuation">(</span><span class="token string">'#'</span><span class="token punctuation">,</span> BATCH_NO<span class="token punctuation">)</span> <span class="token keyword">AS</span> BATCH_NO<span class="token punctuation">,</span>
+       SPECIAL_DEBT_LIMIT<span class="token punctuation">,</span>
+       SPECIAL_DEBT_BAL<span class="token punctuation">,</span>
+       GENERAL_DEBT_LIMIT<span class="token punctuation">,</span>
+       GENERAL_DEBT_BAL<span class="token punctuation">,</span>
+       NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span>
+       NEW_SPEDEBT_BAL<span class="token punctuation">,</span>
+       LANDBANK_DEBT_LIMIT<span class="token punctuation">,</span>
+       LANDBANK_DEBT_BAL<span class="token punctuation">,</span>
+       TURNPIKE_DEBT_LIMIT<span class="token punctuation">,</span>
+       TURNPIKE_DEBT_BAL<span class="token punctuation">,</span>
+       SHEDREFORM_DEBT_LIMIT<span class="token punctuation">,</span>
+       SHEDREFORM_DEBT_BAL<span class="token punctuation">,</span>
+       OTHER_SPEDEBT_LIMIT<span class="token punctuation">,</span>
+       OTHER_SPEDEBT_BAL<span class="token punctuation">,</span>
+       NEW_GENDEBT_LIMIT<span class="token punctuation">,</span>
+       NEW_GENDEBT_BAL<span class="token punctuation">,</span>
+       FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span>
+       SPEDEBT_EXPREFIN_LIMIT<span class="token punctuation">,</span>
+       REPSPE_REFIN_LIMIT<span class="token punctuation">,</span>
+       NEWSPE_REFIN_LIMIT<span class="token punctuation">,</span>
+       REFSPE_REP_LIMIT<span class="token punctuation">,</span>
+       REFSPE_NEWSPE_LIMIT<span class="token punctuation">,</span>
+       SPEDEBT_EXPREFIN_BAL<span class="token punctuation">,</span>
+       OTHDEBT_EXPREFIN_LIMIT<span class="token punctuation">,</span>
+       REPGEN_REFIN_LIMIT<span class="token punctuation">,</span>
+       NEWGEN_REFIN_LIMIT<span class="token punctuation">,</span>
+       REFGEN_REP_LIMIT<span class="token punctuation">,</span>
+       REFGEN_NEWSPE_LIMIT<span class="token punctuation">,</span>
+       OTHDEBT_EXPREFIN_BAL<span class="token punctuation">,</span>
+       REPDEBT_LIMIT<span class="token punctuation">,</span>
+       REPDEBT_BAL<span class="token punctuation">,</span>
+       <span class="token keyword">LIMIT</span>
+<span class="token keyword">FROM</span> BAS_DEBT_V_LIMIT
+<span class="token keyword">WHERE</span> BILL_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> DATA_TYPE <span class="token operator">=</span> <span class="token string">'03'</span>
+  <span class="token operator">AND</span> MOF_DIV_CODE <span class="token operator">=</span> <span class="token string">'42'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>MOF_DIV_CODE</code>来源为本区划</p>
+<h3 id="限额分解录入"><a href="#限额分解录入" class="headerlink" title="限额分解录入"></a>限额分解录入</h3><h4 id="列表查询-1"><a href="#列表查询-1" class="headerlink" title="列表查询"></a>列表查询</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> T<span class="token punctuation">.</span>DEBT_LIMIT_ID<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>FISCAL_YEAR<span class="token punctuation">,</span>
+       AD<span class="token punctuation">.</span>NAME                                                      AD_NAME<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>BATCH_NO<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_GENDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> NEW_DEBT_LIMIT<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_GENDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                               <span class="token keyword">AS</span> NEW_GENDEBT_LIMIT<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                              <span class="token keyword">AS</span> FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>                               <span class="token keyword">AS</span> NEW_SPEDEBT_LIMIT
+<span class="token keyword">FROM</span> BAS_DEBT_V_LIMIT T
+         <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> DSY_V_ELE_AD AD <span class="token keyword">ON</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> AD<span class="token punctuation">.</span>CODE
+<span class="token keyword">WHERE</span> T<span class="token punctuation">.</span>BILL_TYPE <span class="token operator">=</span> <span class="token string">'02'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>DATA_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>IS_DELETED <span class="token operator">=</span> <span class="token string">'2'</span>
+  <span class="token operator">and</span> T<span class="token punctuation">.</span>ad_code <span class="token operator">like</span> concat<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token string">'%'</span><span class="token punctuation">)</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>ad_code <span class="token operator">like</span> concat<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token string">'%'</span><span class="token punctuation">)</span>
+  <span class="token operator">and</span> <span class="token keyword">exists</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token number">1</span>
+             <span class="token keyword">from</span> dsy_t_wf_task_complete wf
+             <span class="token keyword">where</span> wf<span class="token punctuation">.</span>wf_id <span class="token operator">=</span> concat<span class="token punctuation">(</span>T<span class="token punctuation">.</span>wf_id<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+               <span class="token operator">and</span> wf<span class="token punctuation">.</span>node_current_id <span class="token operator">=</span> <span class="token number">1</span>
+               <span class="token operator">and</span> wf<span class="token punctuation">.</span>ywsj_id <span class="token operator">=</span> T<span class="token punctuation">.</span>DEBT_LIMIT_ID<span class="token punctuation">)</span>
+  <span class="token operator">and</span> T<span class="token punctuation">.</span>WF_ID <span class="token operator">=</span> <span class="token number">100110</span>
+  <span class="token operator">and</span> <span class="token punctuation">(</span>T<span class="token punctuation">.</span>NODE_CURRENT_ID <span class="token operator">!=</span> <span class="token number">1</span> <span class="token operator">or</span> <span class="token punctuation">(</span>T<span class="token punctuation">.</span>NODE_CURRENT_ID <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">and</span> T<span class="token punctuation">.</span>WF_STATUS <span class="token operator">!=</span> <span class="token string">'001'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token operator">=</span> <span class="token number">2022</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>核心表：</p>
+<p><code>债务限额表 BAS_DEBT_LIMIT</code></p>
+<p><code>基础数据表 区划表 BAS_MOF_DIV</code></p>
+<h4 id="录入"><a href="#录入" class="headerlink" title="录入"></a>录入</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> BAS_DEBT_LIMIT <span class="token punctuation">(</span>DEBT_LIMIT_ID<span class="token punctuation">,</span> REC_DIV_CODE<span class="token punctuation">,</span>
+                            MOF_DIV_CODE<span class="token punctuation">,</span> FISCAL_YEAR<span class="token punctuation">,</span> BATCH_NO<span class="token punctuation">,</span> NEW_GENDEBT_LIMIT<span class="token punctuation">,</span>
+                            FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span> NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span> WF_ID<span class="token punctuation">,</span> NODE_CURRENT_ID<span class="token punctuation">,</span>
+                            NODE_NEXT_ID<span class="token punctuation">,</span> WF_STATUS<span class="token punctuation">,</span> IS_END<span class="token punctuation">,</span> MOF_AD_CODE<span class="token punctuation">,</span> REC_AD_CODE<span class="token punctuation">,</span> 		                               BILL_TYPE<span class="token punctuation">,</span> DATA_TYPE<span class="token punctuation">,</span> 
+                            CREATE_USER<span class="token punctuation">,</span>
+                            CREATE_TIME<span class="token punctuation">,</span> LIMIT_TYPE<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> <span class="token string">'02'</span><span class="token punctuation">,</span> <span class="token string">'01'</span><span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">,</span> ?<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="限额分解下达"><a href="#限额分解下达" class="headerlink" title="限额分解下达"></a>限额分解下达</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">UPDATE</span> BAS_DEBT_LIMIT <span class="token keyword">SET</span> IS_XD<span class="token operator">=</span><span class="token string">'1'</span><span class="token punctuation">,</span>UPDATE_USER<span class="token operator">=</span>?<span class="token punctuation">,</span>UPDATE_TIME<span class="token operator">=</span>? <span class="token keyword">WHERE</span> DEBT_LIMIT_ID<span class="token operator">=</span>?<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="限额调整录入"><a href="#限额调整录入" class="headerlink" title="限额调整录入"></a>限额调整录入</h3><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> T<span class="token punctuation">.</span>LIMIT_ADJ_ID<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REC_AD_CODE<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REC_DIV_CODE<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>FISCAL_YEAR<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>BATCH_NO<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>ADJUST_REASON<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>AD_NAME<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEW_SPE_LIMIT_ADJ  <span class="token keyword">AS</span> NEW_SPE_LIMIT_ADJ<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEW_GEN_LIMIT_ADJ  <span class="token keyword">AS</span> NEW_GEN_LIMIT_ADJ<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>FOREIGN_LIMIT_ADJ  <span class="token keyword">AS</span> FOREIGN_LIMIT_ADJ<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEW_GENDEBT_LIMIT  <span class="token keyword">AS</span> NEW_GENDEBT_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEW_LIMIT_SUM_ADJ  <span class="token keyword">AS</span> NEW_LIMIT_SUM_ADJ<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEW_SPEDEBT_LIMIT  <span class="token keyword">AS</span> NEW_SPEDEBT_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>FOREIGN_DEBT_LIMIT <span class="token keyword">AS</span> FOREIGN_DEBT_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEW_LIMIT_SUM      <span class="token keyword">AS</span> NEW_LIMIT_SUM
+<span class="token keyword">FROM</span> GD_DEBT_V_LIMIT_ADJ_LIMIT T
+<span class="token keyword">WHERE</span> T<span class="token punctuation">.</span>DATA_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>IS_DELETED <span class="token operator">=</span> <span class="token number">2</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token operator">=</span> <span class="token number">2022</span>
+  <span class="token operator">and</span> <span class="token keyword">exists</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token number">1</span>
+             <span class="token keyword">from</span> dsy_t_wf_task_complete wf
+             <span class="token keyword">where</span> wf<span class="token punctuation">.</span>wf_id <span class="token operator">=</span> concat<span class="token punctuation">(</span>T<span class="token punctuation">.</span>wf_id<span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span>
+               <span class="token operator">and</span> wf<span class="token punctuation">.</span>node_current_id <span class="token operator">=</span> <span class="token number">1</span>
+               <span class="token operator">and</span> wf<span class="token punctuation">.</span>ywsj_id <span class="token operator">=</span> T<span class="token punctuation">.</span>LIMIT_ADJ_ID<span class="token punctuation">)</span>
+  <span class="token operator">and</span> T<span class="token punctuation">.</span>WF_ID <span class="token operator">=</span> <span class="token number">100115</span>
+  <span class="token operator">and</span> <span class="token punctuation">(</span>T<span class="token punctuation">.</span>NODE_CURRENT_ID <span class="token operator">!=</span> <span class="token number">1</span> <span class="token operator">or</span> <span class="token punctuation">(</span>T<span class="token punctuation">.</span>NODE_CURRENT_ID <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">and</span> T<span class="token punctuation">.</span>WF_STATUS <span class="token operator">!=</span> <span class="token string">'001'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token operator">and</span> T<span class="token punctuation">.</span>ad_code <span class="token operator">like</span> concat<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token string">'%'</span><span class="token punctuation">)</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>ad_code <span class="token operator">like</span> concat<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token string">'%'</span><span class="token punctuation">)</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> FISCAL_YEAR <span class="token keyword">DESC</span><span class="token punctuation">,</span> BATCH_NO <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="再融资债券限额"><a href="#再融资债券限额" class="headerlink" title="再融资债券限额"></a>再融资债券限额</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> T<span class="token punctuation">.</span>FISCAL_YEAR<span class="token punctuation">,</span>
+       AD<span class="token punctuation">.</span>NAME                                                               <span class="token keyword">AS</span> AD_NAME<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>BATCH_NO<span class="token punctuation">,</span>
+       <span class="token punctuation">(</span>NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>SPEDEBT_EXPREFIN_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>OTHDEBT_EXPREFIN_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> EXPREFIN_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REPGEN_REFIN_LIMIT                                                  <span class="token keyword">AS</span> REPGEN_REFIN_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REPSPE_REFIN_LIMIT
+                                                                             <span class="token keyword">AS</span> REPSPE_REFIN_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEWGEN_REFIN_LIMIT
+                                                                             <span class="token keyword">AS</span> NEWGEN_REFIN_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>NEWSPE_REFIN_LIMIT
+                                                                             <span class="token keyword">AS</span> NEWSPE_REFIN_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REFGEN_REP_LIMIT
+                                                                             <span class="token keyword">AS</span> REFGEN_REP_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REFSPE_REP_LIMIT
+                                                                             <span class="token keyword">AS</span> REFSPE_REP_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REFGEN_NEWSPE_LIMIT
+                                                                             <span class="token keyword">AS</span> REFGEN_NEWSPE_LIMIT<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>REFSPE_NEWSPE_LIMIT
+                                                                             <span class="token keyword">AS</span> REFSPE_NEWSPE_LIMIT<span class="token punctuation">,</span>
+       to_char<span class="token punctuation">(</span>T<span class="token punctuation">.</span>CREATE_TIME<span class="token punctuation">,</span> <span class="token string">'YYYY-MM-DD hh24:MI:SS'</span><span class="token punctuation">)</span>                       <span class="token keyword">AS</span> CREATE_TIME
+<span class="token keyword">FROM</span> BAS_DEBT_V_LIMIT T
+         <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> DSY_V_ELE_AD AD <span class="token keyword">ON</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> AD<span class="token punctuation">.</span>CODE
+<span class="token keyword">WHERE</span> T<span class="token punctuation">.</span>BILL_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>DATA_TYPE <span class="token operator">=</span> <span class="token string">'03'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> <span class="token number">42</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token operator">=</span> <span class="token number">2022</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> T<span class="token punctuation">.</span>REC_DATE <span class="token keyword">DESC</span><span class="token punctuation">,</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token keyword">DESC</span><span class="token punctuation">,</span> T<span class="token punctuation">.</span>BATCH_NO <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查询表以及条件和<code>新增债券限额</code>完全一致，唯一区别在于字段<code>DATA_TYPE</code></p>
+<h2 id="债券总限额"><a href="#债券总限额" class="headerlink" title="债券总限额"></a>债券总限额</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> T<span class="token punctuation">.</span>FISCAL_YEAR<span class="token punctuation">,</span>
+       AD<span class="token punctuation">.</span>NAME                                                           <span class="token keyword">AS</span> AD_NAME<span class="token punctuation">,</span>
+       T<span class="token punctuation">.</span>BATCH_NO<span class="token punctuation">,</span>
+       <span class="token punctuation">(</span>NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>GENERAL_DEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>SPECIAL_DEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1</span> <span class="token keyword">AS</span> HJ<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>GENERAL_DEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1</span>                                  <span class="token keyword">AS</span> GENERAL_DEBT_LIMIT<span class="token punctuation">,</span>
+       NVL<span class="token punctuation">(</span>T<span class="token punctuation">.</span>SPECIAL_DEBT_LIMIT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1</span>                                  <span class="token keyword">AS</span> SPECIAL_DEBT_LIMIT
+<span class="token keyword">FROM</span> BAS_DEBT_V_LIMIT T
+         <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> DSY_V_ELE_AD AD <span class="token keyword">ON</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> AD<span class="token punctuation">.</span>CODE
+<span class="token keyword">WHERE</span> T<span class="token punctuation">.</span>BILL_TYPE <span class="token operator">=</span> <span class="token string">'01'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>DATA_TYPE <span class="token operator">=</span> <span class="token string">'04'</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>REC_AD_CODE <span class="token operator">=</span> <span class="token number">42</span>
+  <span class="token operator">AND</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token operator">=</span> <span class="token number">2022</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> T<span class="token punctuation">.</span>REC_DATE <span class="token keyword">DESC</span><span class="token punctuation">,</span> T<span class="token punctuation">.</span>FISCAL_YEAR <span class="token keyword">DESC</span><span class="token punctuation">,</span> T<span class="token punctuation">.</span>BATCH_NO <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同上，区别在于<code>DATA_TYPE</code></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">zhuzhiyong</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zzyong24.github.io/2022/04/12/gong-zuo/202207-bei-jing-da-shu-yuan/zhai-wu-xi-tong-xian-e-guan-li/">https://zzyong24.github.io/2022/04/12/gong-zuo/202207-bei-jing-da-shu-yuan/zhai-wu-xi-tong-xian-e-guan-li/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">zhuzhiyong</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%B7%A5%E4%BD%9C/">
+                                    <span class="chip bg-color">工作</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/04/12/gong-zuo/202202-yi-yao-wang/shi-xi-fu-pan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="实习复盘">
+                        
+                        <span class="card-title">实习复盘</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B7%A5%E4%BD%9C/" class="post-category">
+                                    工作
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E4%BD%9C/">
+                        <span class="chip bg-color">工作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/04/12/gong-zuo/202207-bei-jing-da-shu-yuan/zhai-wu-xi-tong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="债务系统业务流程">
+                        
+                        <span class="card-title">债务系统业务流程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%9C%B0%E6%96%B9%E6%94%BF%E5%BA%9C%E5%80%BA%E5%8A%A1/" class="post-category">
+                                    地方政府债务
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B7%A5%E4%BD%9C/">
+                        <span class="chip bg-color">工作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 月明水清深<br />'
+            + '文章作者: zhuzhiyong<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    </script>
+<footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2024</span>
+            
+            <a href="/about" target="_blank">zhuzhiyong</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">156.1k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "4";
+                        var startDate = "9";
+                        var startHour = "12";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://www.beianx.cn/info/274669309276229" target="_blank">20220409324</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zzyong24" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1968286694@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1968286694" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1968286694" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
